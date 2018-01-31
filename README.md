@@ -16,6 +16,8 @@ Relies on `position: sticky` and `IntersectionObserver` support.
 | No IE / Edge 16+ | 55+ | 56+ | [Polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill) | 43+ |
 
 
+### Usage
+
 ```
 import observeStickyEvents from 'sticky-events';
 
