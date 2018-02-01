@@ -4,7 +4,9 @@
   "description": "",
   "main": "sticky-events.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/webpack --progress --colors --config webpack.config.js --watch",
+    "dist": "./node_modules/.bin/webpack --config webpack.config.js --bail"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/ryanwalters/sticky-events/issues"
   },
-  "homepage": "https://github.com/ryanwalters/sticky-events#readme"
+  "homepage": "https://github.com/ryanwalters/sticky-events#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0"
+  }
 }
