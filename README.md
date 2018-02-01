@@ -18,6 +18,14 @@ Relies on `position: sticky` and `IntersectionObserver` support. No other depend
 
 ### Usage
 
+*CSS*
+```css
+/* Import the styles. In CSS/JS, whatever floats your boat */
+
+@import "~sticky-events/sticky-events.css";
+```
+
+*Javascript*
 ```javascript
 import observeStickyEvents from 'sticky-events';
 
