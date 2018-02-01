@@ -1,13 +1,13 @@
 # Sticky Events
 
-Fire events on `.sticky-events` elements when an it becomes sticky or unsticky.
+Event listeners for `position: sticky`.
 
 Events:
-- `sticky-change`  Fired on both stuck and unstuck events
+- `sticky-change`  Fired when an element becomes stuck or unstuck
 - `sticky-stuck`   Fired only when an element becomes stuck
 - `sticky-unstuck` Fired only when an element becomes unstuck
 
-Relies on `position: sticky` and `IntersectionObserver` support.
+Relies on `position: sticky` and `IntersectionObserver` support. No other dependencies.
 
 
 
