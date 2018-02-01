@@ -38,7 +38,7 @@ observeStickyEvents();
 
 const container = document.querySelector('#my-container');
 
-observeStickyChange(container);
+observeStickyEvents(container);
 
 
 // Events are dispatched on elements with the `.sticky-events` class
