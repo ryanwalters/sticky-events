@@ -30,8 +30,8 @@ Relies on `position: sticky` and `IntersectionObserver` support. No other depend
 import observeStickyEvents from 'sticky-events';
 
 /**
- * Passing no arguments makes the default container the current `document`
- * and adds listeners to all `.sticky-events` elements on the page
+ * Passing no arguments makes `document` the default container and adds
+ * listeners to all `.sticky-events` elements on the page
  */
  
 observeStickyEvents();
