@@ -1,13 +1,23 @@
 /**
  * Sticky Events
+ * // todo: allow configuration. e.g. custom STICKY_SELECTOR
  */
 
 // Constants
 
-const SentinelClassName = {
-  TOP: 'sticky-sentinel-top',
-  BOTTOM: 'sticky-sentinel-bottom',
+const Event = {
+  ON_CHANGE: 'sticky-change',
+  ON_STUCK: 'sticky-stuck',
+  ON_UNSTUCK: 'sticky-unstuck',
 };
+
+const ClassName = {
+  SENTINEL: 'sticky-events-sentinel',
+  SENTINEL_TOP: 'sticky-events-sentinel-top',
+  SENTINEL_BOTTOM: 'sticky-events-sentinel-bottom',
+};
+
+const STICKY_SELECTOR = '.sticky-events';
 
 
 /**
@@ -25,7 +35,7 @@ export default function observeStickyEvents(container = document) {
 
 
 /**
- * Sets up an intersection observer to notify `document` when elements with the SentinelClassName.TOP become
+ * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_TOP` become
  * visible/hidden at the top of the sticky container.
  *
  * @param {Element|HTMLDocument} container
@@ -36,7 +46,7 @@ function observeHeaders(container) {
     records.forEach((record) => {
       const targetInfo = record.boundingClientRect;
       const stickyParent = record.target.parentElement;
-      const stickyTarget = stickyParent.querySelector('.sticky');
+      const stickyTarget = stickyParent.querySelector(STICKY_SELECTOR);
       const rootBoundsInfo = record.rootBounds;
 
       stickyParent.style.position = 'relative';
@@ -56,14 +66,14 @@ function observeHeaders(container) {
     },
   });
 
-  const sentinels = addSentinels(container, SentinelClassName.TOP);
+  const sentinels = addSentinels(container, ClassName.SENTINEL_TOP);
 
   sentinels.forEach(sentinel => observer.observe(sentinel));
 }
 
 
 /**
- * Sets up an intersection observer to notify `document` when elements with the SentinelClassName.BOTTOM become
+ * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_BOTTOM` become
  * visible/hidden at the bottom of the sticky container.
  *
  * @param {Element|HTMLDocument} container
@@ -73,7 +83,7 @@ function observeFooters(container) {
   const observer = new IntersectionObserver((records) => {
     records.forEach((record) => {
       const targetInfo = record.boundingClientRect;
-      const stickyTarget = record.target.parentElement.querySelector('.sticky');
+      const stickyTarget = record.target.parentElement.querySelector(STICKY_SELECTOR);
       const rootBoundsInfo = record.rootBounds;
       const ratio = record.intersectionRatio;
       const bottomIntersectionLikelihood = Math.round(targetInfo.top / rootBoundsInfo.height);
@@ -95,7 +105,7 @@ function observeFooters(container) {
 
   // Add the bottom sentinels to each section and attach an observer.
 
-  const sentinels = addSentinels(container, SentinelClassName.BOTTOM);
+  const sentinels = addSentinels(container, ClassName.SENTINEL_BOTTOM);
 
   sentinels.forEach(sentinel => observer.observe(sentinel));
 }
@@ -111,8 +121,8 @@ function observeFooters(container) {
  */
 
 function fire(isSticky, stickyTarget) {
-  stickyTarget.dispatchEvent(new CustomEvent('sticky-change', { detail: { isSticky } }));
-  stickyTarget.dispatchEvent(new CustomEvent(isSticky ? 'sticky-stuck' : 'sticky-unstuck'));
+  stickyTarget.dispatchEvent(new CustomEvent(Event.ON_CHANGE, { detail: { isSticky } }));
+  stickyTarget.dispatchEvent(new CustomEvent(isSticky ? Event.ON_STUCK : Event.ON_UNSTUCK));
 }
 
 
@@ -125,10 +135,10 @@ function fire(isSticky, stickyTarget) {
  */
 
 function addSentinels(container, className) {
-  return Array.from(container.querySelectorAll('.sticky')).map((stickyEl) => {
+  return Array.from(container.querySelectorAll(STICKY_SELECTOR)).map((stickyEl) => {
     const sentinel = document.createElement('div');
 
-    sentinel.classList.add('sticky-sentinel', className);
+    sentinel.classList.add(ClassName.SENTINEL, className);
 
     const appendedSentinel = stickyEl.parentElement.appendChild(sentinel);
 
@@ -157,7 +167,7 @@ function getSentinelPosition(stickyEl, sentinel, className) {
   const parentPadding = parseInt(parentStyle.paddingTop);
 
   switch (className) {
-    case SentinelClassName.TOP: {
+    case ClassName.SENTINEL_TOP: {
       const sentinelHeight = parseInt(sentinelStyle.height);
 
       return {
@@ -165,7 +175,7 @@ function getSentinelPosition(stickyEl, sentinel, className) {
       };
     }
 
-    case SentinelClassName.BOTTOM: {
+    case ClassName.SENTINEL_BOTTOM: {
       const stickyHeight = parseInt(stickyStyle.height);
 
       return {

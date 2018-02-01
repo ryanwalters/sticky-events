@@ -1,0 +1,15 @@
+
+.sticky-events {
+    position: sticky;
+}
+
+.sticky-events-sentinel {
+    left: 0;
+    position: absolute;
+    right: 0;
+    visibility: hidden;
+}
+
+.sticky-events-sentinel-top {
+    height: 50px;
+}
