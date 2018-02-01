@@ -18,7 +18,7 @@ Relies on `position: sticky` and `IntersectionObserver` support. No other depend
 
 ### Usage
 
-```
+```javascript
 import observeStickyEvents from 'sticky-events';
 
 // Passing no arguments makes the default container the current `document`
