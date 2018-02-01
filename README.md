@@ -29,12 +29,18 @@ Relies on `position: sticky` and `IntersectionObserver` support. No other depend
 ```javascript
 import observeStickyEvents from 'sticky-events';
 
-// Passing no arguments makes the default container the current `document` and adds listeners to all `.sticky-events` elements on the page
-
+/**
+ * Passing no arguments makes the default container the current `document`
+ * and adds listeners to all `.sticky-events` elements on the page
+ */
+ 
 observeStickyEvents();
 
-
-// You can optionally pass an element, making that the container for your sticky items. This will only add listeners to `.sticky-events` elements inside of this container
+/**
+ * You can optionally pass an element, making that the container for your
+ * sticky items. This will only add listeners to `.sticky-events` elements
+ * inside of this container
+ */
 
 const container = document.querySelector('#my-container');
 
