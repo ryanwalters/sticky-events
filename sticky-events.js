@@ -1,112 +1,25 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["observeStickyEvents"] = factory();
-	else
-		root["observeStickyEvents"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-exports.default = observeStickyEvents;
 /**
  * Sticky Events
- * // todo: allow configuration. e.g. custom STICKY_SELECTOR
+ * todo: allow configuration. e.g. custom STICKY_SELECTOR
  */
 
 // Constants
 
-var Event = {
-  ON_CHANGE: 'sticky-change',
-  ON_STUCK: 'sticky-stuck',
-  ON_UNSTUCK: 'sticky-unstuck'
+export const StickyEvent = {
+  CHANGE: 'sticky-change',
+  STUCK: 'sticky-stuck',
+  UNSTUCK: 'sticky-unstuck',
 };
 
-var ClassName = {
-  SENTINEL: 'sticky-events-sentinel',
-  SENTINEL_TOP: 'sticky-events-sentinel-top',
-  SENTINEL_BOTTOM: 'sticky-events-sentinel-bottom'
+const ClassName = {
+  SENTINEL: 'sticky-events--sentinel',
+  SENTINEL_TOP: 'sticky-events--sentinel-top',
+  SENTINEL_BOTTOM: 'sticky-events--sentinel-bottom',
 };
 
-var STICKY_SELECTOR = '.sticky-events';
+const STICKY_SELECTOR = '.sticky-events';
+
 
 /**
  * Initialize the intersection observers on `.sticky` elements within the specified container.
@@ -116,12 +29,11 @@ var STICKY_SELECTOR = '.sticky-events';
  * @param {Element|HTMLDocument|Document} container
  */
 
-function observeStickyEvents() {
-  var container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
-
+export function observeStickyEvents(container = document) {
   observeHeaders(container);
   observeFooters(container);
 }
+
 
 /**
  * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_TOP` become
@@ -131,12 +43,12 @@ function observeStickyEvents() {
  */
 
 function observeHeaders(container) {
-  var observer = new IntersectionObserver(function (records) {
-    records.forEach(function (record) {
-      var targetInfo = record.boundingClientRect;
-      var stickyParent = record.target.parentElement;
-      var stickyTarget = stickyParent.querySelector(STICKY_SELECTOR);
-      var rootBoundsInfo = record.rootBounds;
+  const observer = new IntersectionObserver((records) => {
+    records.forEach((record) => {
+      const targetInfo = record.boundingClientRect;
+      const stickyParent = record.target.parentElement;
+      const stickyTarget = stickyParent.querySelector(STICKY_SELECTOR);
+      const rootBoundsInfo = record.rootBounds;
 
       stickyParent.style.position = 'relative';
 
@@ -148,18 +60,18 @@ function observeHeaders(container) {
         fire(false, stickyTarget);
       }
     });
-  }, _extends({
-    threshold: [0]
-  }, !(container instanceof HTMLDocument) && {
-    root: container
-  }));
-
-  var sentinels = addSentinels(container, ClassName.SENTINEL_TOP);
-
-  sentinels.forEach(function (sentinel) {
-    return observer.observe(sentinel);
+  }, {
+    threshold: [0],
+    ...!(container instanceof HTMLDocument) && {
+      root: container,
+    },
   });
+
+  const sentinels = addSentinels(container, ClassName.SENTINEL_TOP);
+
+  sentinels.forEach(sentinel => observer.observe(sentinel));
 }
+
 
 /**
  * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_BOTTOM` become
@@ -169,13 +81,13 @@ function observeHeaders(container) {
  */
 
 function observeFooters(container) {
-  var observer = new IntersectionObserver(function (records) {
-    records.forEach(function (record) {
-      var targetInfo = record.boundingClientRect;
-      var stickyTarget = record.target.parentElement.querySelector(STICKY_SELECTOR);
-      var rootBoundsInfo = record.rootBounds;
-      var ratio = record.intersectionRatio;
-      var bottomIntersectionLikelihood = Math.round(targetInfo.top / rootBoundsInfo.height);
+  const observer = new IntersectionObserver((records) => {
+    records.forEach((record) => {
+      const targetInfo = record.boundingClientRect;
+      const stickyTarget = record.target.parentElement.querySelector(STICKY_SELECTOR);
+      const rootBoundsInfo = record.rootBounds;
+      const ratio = record.intersectionRatio;
+      const bottomIntersectionLikelihood = Math.round(targetInfo.top / rootBoundsInfo.height);
 
       if (targetInfo.bottom > rootBoundsInfo.top && ratio === 1 && bottomIntersectionLikelihood === 0) {
         fire(true, stickyTarget);
@@ -185,20 +97,20 @@ function observeFooters(container) {
         fire(false, stickyTarget);
       }
     });
-  }, _extends({
-    threshold: [1]
-  }, !(container instanceof HTMLDocument) && {
-    root: container
-  }));
+  }, {
+    threshold: [1],
+    ...!(container instanceof HTMLDocument) && {
+      root: container,
+    },
+  });
 
   // Add the bottom sentinels to each section and attach an observer.
 
-  var sentinels = addSentinels(container, ClassName.SENTINEL_BOTTOM);
+  const sentinels = addSentinels(container, ClassName.SENTINEL_BOTTOM);
 
-  sentinels.forEach(function (sentinel) {
-    return observer.observe(sentinel);
-  });
+  sentinels.forEach(sentinel => observer.observe(sentinel));
 }
+
 
 /**
  * Dispatch the following events:
@@ -210,9 +122,10 @@ function observeFooters(container) {
  */
 
 function fire(isSticky, stickyTarget) {
-  stickyTarget.dispatchEvent(new CustomEvent(Event.ON_CHANGE, { detail: { isSticky: isSticky } }));
-  stickyTarget.dispatchEvent(new CustomEvent(isSticky ? Event.ON_STUCK : Event.ON_UNSTUCK));
+  stickyTarget.dispatchEvent(new CustomEvent(StickyEvent.CHANGE, { detail: { isSticky } }));
+  stickyTarget.dispatchEvent(new CustomEvent(isSticky ? StickyEvent.STUCK : StickyEvent.UNSTUCK));
 }
+
 
 /**
  * Add sticky sentinels
@@ -223,18 +136,19 @@ function fire(isSticky, stickyTarget) {
  */
 
 function addSentinels(container, className) {
-  return Array.from(container.querySelectorAll(STICKY_SELECTOR)).map(function (stickyEl) {
-    var sentinel = document.createElement('div');
+  return Array.from(container.querySelectorAll(STICKY_SELECTOR)).map((stickyEl) => {
+    const sentinel = document.createElement('div');
 
     sentinel.classList.add(ClassName.SENTINEL, className);
 
-    var appendedSentinel = stickyEl.parentElement.appendChild(sentinel);
+    const appendedSentinel = stickyEl.parentElement.appendChild(sentinel);
 
     Object.assign(appendedSentinel.style, getSentinelPosition(stickyEl, appendedSentinel, className));
 
     return appendedSentinel;
   });
 }
+
 
 /**
  * Determine the position of the sentinel
@@ -246,38 +160,32 @@ function addSentinels(container, className) {
  */
 
 function getSentinelPosition(stickyEl, sentinel, className) {
-  var sentinelStyle = window.getComputedStyle(sentinel);
-  var stickyStyle = window.getComputedStyle(stickyEl);
-  var parentStyle = window.getComputedStyle(stickyEl.parentElement);
+  const sentinelStyle = window.getComputedStyle(sentinel);
+  const stickyStyle = window.getComputedStyle(stickyEl);
+  const parentStyle = window.getComputedStyle(stickyEl.parentElement);
 
-  var stickyTop = parseInt(stickyStyle.top);
-  var parentPadding = parseInt(parentStyle.paddingTop);
+  const stickyTop = parseInt(stickyStyle.top);
+  const parentPadding = parseInt(parentStyle.paddingTop);
 
   switch (className) {
-    case ClassName.SENTINEL_TOP:
-      {
-        var sentinelHeight = parseInt(sentinelStyle.height);
+    case ClassName.SENTINEL_TOP: {
+      const sentinelHeight = parseInt(sentinelStyle.height);
 
-        return {
-          top: -(sentinelHeight - parentPadding + stickyTop) + 'px'
-        };
-      }
+      return {
+        top: `${-((sentinelHeight - parentPadding) + stickyTop)}px`,
+      };
+    }
 
-    case ClassName.SENTINEL_BOTTOM:
-      {
-        var stickyHeight = parseInt(stickyStyle.height);
+    case ClassName.SENTINEL_BOTTOM: {
+      const stickyHeight = parseInt(stickyStyle.height);
 
-        return {
-          bottom: stickyTop + 'px',
-          height: stickyHeight + parentPadding + 'px'
-        };
-      }
+      return {
+        bottom: `${stickyTop}px`,
+        height: `${stickyHeight + parentPadding}px`,
+      };
+    }
 
     default:
       return {};
   }
 }
-
-/***/ })
-/******/ ])["default"];
-});
