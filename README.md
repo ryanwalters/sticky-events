@@ -39,6 +39,8 @@ If you use Babel, you will need to include the `babel-plugin-transform-object-re
 
 ### Usage
 
+[View demo](https://ryanwalters.github.io/sticky-events/)
+
 *HTML*
 ```html
 <div>
