@@ -1,13 +1,12 @@
 
 const path = require('path');
-
-const isProd = process.env.NODE_ENV === 'production';
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: './src/sticky-events.js',
+  entry: './sticky-events.js',
   output: {
     path: path.resolve(__dirname, './'),
-    filename: 'sticky-events.js',
+    filename: 'sticky-events.es5.js',
     libraryTarget: 'umd',
     libraryExport: 'default',
     library: 'observeStickyEvents',
@@ -17,4 +16,7 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
     ],
   },
+  plugins: [
+    new UglifyJSPlugin(),
+  ],
 };
