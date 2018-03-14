@@ -74,26 +74,29 @@ If you use Babel, you will need to include the `babel-plugin-transform-object-re
 
 *Javascript*
 ```javascript
-import { observeStickyEvents, StickyEvent } from 'sticky-events';
+import { observeStickyEvents, StickyEvent } from "./sticky-events.js";
 
-// Passing no arguments makes the default container the current `document` and adds listeners to all `.sticky-events` elements on the page
+
+// Add listeners to all `.sticky-events` elements on the page
 
 observeStickyEvents();
 
 
-// You can optionally pass an element, making that the container for your sticky items. This will only add listeners to `.sticky-events` elements inside of this container
-
-const container = document.querySelector('#my-container');
-
-observeStickyEvents(container);
-
-
 // Events are dispatched on elements with the `.sticky-events` class
-// Note: jQuery is not required, but used simply for readability
 
-const $stickies = $('.sticky-events');
+const stickies = Array.from(document.querySelectorAll('.sticky-events'));
 
-$stickies.on(StickyEvent.CHANGE, e => $(e.target).css('background-color', e.detail.isSticky ? 'blue' : ''));
-$stickies.on(StickyEvent.STUCK, e => console.log(e.target, 'stuck'));
-$stickies.on(StickyEvent.UNSTUCK, e => console.log(e.target, 'unstuck'));
+stickies.forEach((sticky) => {
+  sticky.addEventListener(StickyEvent.CHANGE, (event) => {
+    sticky.classList.toggle('bg-dark', event.detail.isSticky);
+  });
+
+  sticky.addEventListener(StickyEvent.STUCK, (event) => {
+    console.log('stuck');
+  });
+
+  sticky.addEventListener(StickyEvent.UNSTUCK, (event) => {
+    console.log('unstuck');
+  });
+});
 ```

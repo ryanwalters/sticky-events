@@ -30,8 +30,10 @@ const STICKY_SELECTOR = '.sticky-events';
  */
 
 export function observeStickyEvents(container = document) {
-  observeHeaders(container);
-  observeFooters(container);
+  window.requestAnimationFrame(() => {
+    observeHeaders(container);
+    observeFooters(container);
+  });
 }
 
 
@@ -153,35 +155,29 @@ function addSentinels(container, className) {
 /**
  * Determine the position of the sentinel
  *
- * @param {Element} stickyEl
- * @param {Element} sentinel
+ * @param {Element|Node} stickyElement
+ * @param {Element|Node} sentinel
  * @param {String} className
  * @returns {Object}
  */
 
-function getSentinelPosition(stickyEl, sentinel, className) {
-  const sentinelStyle = window.getComputedStyle(sentinel);
-  const stickyStyle = window.getComputedStyle(stickyEl);
-  const parentStyle = window.getComputedStyle(stickyEl.parentElement);
+function getSentinelPosition(stickyElement, sentinel, className) {
+  const stickyStyle = window.getComputedStyle(stickyElement);
+  const parentStyle = window.getComputedStyle(stickyElement.parentElement);
 
-  const stickyTop = parseInt(stickyStyle.top);
   const parentPadding = parseInt(parentStyle.paddingTop);
 
   switch (className) {
     case ClassName.SENTINEL_TOP: {
-      const sentinelHeight = parseInt(sentinelStyle.height);
-
       return {
-        top: `${-((sentinelHeight - parentPadding) + stickyTop)}px`,
+        top: `calc(${-(sentinel.scrollHeight - parentPadding)}px + ${stickyStyle.top})`,
       };
     }
 
     case ClassName.SENTINEL_BOTTOM: {
-      const stickyHeight = parseInt(stickyStyle.height);
-
       return {
-        bottom: `${stickyTop}px`,
-        height: `${stickyHeight + parentPadding}px`,
+        bottom: stickyStyle.top,
+        height: `${stickyElement.scrollHeight + parentPadding}px`,
       };
     }
 

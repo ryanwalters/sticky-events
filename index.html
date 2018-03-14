@@ -1,0 +1,77 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Sticky Events &mdash; Ryan Walters</title>
+    <meta name="description" content="Events for position: sticky">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="sticky-events.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+
+        .container > div {
+            height: 500px;
+        }
+
+        .sticky-events {
+            color: white;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><a href="https://github.com/ryanwalters/sticky-events" target="_blank">Sticky Events</a></h1>
+    <p class="lead">Events for <code>position: sticky</code>.</p>
+    <div>
+        <div class="navbar bg-primary sticky-events">Sticky Heading 1</div>
+    </div>
+    <div>
+        <div class="navbar bg-primary sticky-events">Sticky Heading 2</div>
+    </div>
+    <div>
+        <div class="navbar bg-primary sticky-events">Sticky Heading 3</div>
+    </div>
+    <div>
+        <div class="navbar bg-primary sticky-events">Sticky Heading 4</div>
+    </div>
+    <div>
+        <div class="navbar bg-primary sticky-events">Sticky Heading 5</div>
+    </div>
+</div>
+
+<script type="module">
+  import { observeStickyEvents, StickyEvent } from "./sticky-events.js";
+
+
+  // Add listeners to all `.sticky-events` elements on the page
+
+  observeStickyEvents();
+
+
+  // Events are dispatched on elements with the `.sticky-events` class
+
+  const stickies = Array.from(document.querySelectorAll('.sticky-events'));
+
+  stickies.forEach((sticky) => {
+    sticky.addEventListener(StickyEvent.CHANGE, (event) => {
+      sticky.classList.toggle('bg-dark', event.detail.isSticky);
+    });
+
+    sticky.addEventListener(StickyEvent.STUCK, (event) => {
+      console.log('stuck');
+    });
+
+    sticky.addEventListener(StickyEvent.UNSTUCK, (event) => {
+      console.log('unstuck');
+    });
+  });
+</script>
+</body>
+</html>
