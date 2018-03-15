@@ -1,7 +1,7 @@
 {
   "name": "sticky-events",
   "version": "1.2.1",
-  "description": "",
+  "description": "Events for `position: sticky`",
   "main": "sticky-events.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
