@@ -8,8 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, './'),
     filename: 'sticky-events.es5.js',
     libraryTarget: 'umd',
-    libraryExport: 'default',
-    library: 'observeStickyEvents',
   },
   module: {
     rules: [
