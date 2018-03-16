@@ -135,16 +135,29 @@ function fire(isSticky, stickyTarget) {
  */
 
 function addSentinels(container, className) {
-  return Array.from(container.querySelectorAll(STICKY_SELECTOR)).map((stickyEl) => {
+  return Array.from(container.querySelectorAll(STICKY_SELECTOR)).map((stickyElement) => {
     const sentinel = document.createElement('div');
+    const stickyParent = stickyElement.parentElement;
 
     sentinel.classList.add(ClassName.SENTINEL, className);
 
-    const appendedSentinel = stickyEl.parentElement.appendChild(sentinel);
+    switch (className) {
+      case ClassName.SENTINEL_TOP: {
+        stickyParent.insertBefore(sentinel, stickyElement);
 
-    Object.assign(appendedSentinel.style, getSentinelPosition(stickyEl, appendedSentinel, className));
+        break;
+      }
 
-    return appendedSentinel;
+      case ClassName.SENTINEL_BOTTOM: {
+        stickyParent.appendChild(sentinel);
+
+        Object.assign(sentinel.style, getSentinelPosition(stickyElement, sentinel, className));
+
+        break;
+      }
+    }
+
+    return sentinel;
   });
 }
 
@@ -165,12 +178,6 @@ function getSentinelPosition(stickyElement, sentinel, className) {
   const parentPadding = parseInt(parentStyle.paddingTop);
 
   switch (className) {
-    case ClassName.SENTINEL_TOP: {
-      return {
-        top: `calc(${-(sentinel.scrollHeight - parentPadding)}px + ${stickyStyle.top})`,
-      };
-    }
-
     case ClassName.SENTINEL_BOTTOM: {
       return {
         bottom: stickyStyle.top,

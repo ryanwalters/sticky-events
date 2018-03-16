@@ -12,5 +12,5 @@
 }
 
 .sticky-events--sentinel-top {
-    height: 50px;
+    position: relative;
 }
