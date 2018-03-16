@@ -151,7 +151,7 @@ function addSentinels(container, className) {
       case ClassName.SENTINEL_BOTTOM: {
         stickyParent.appendChild(sentinel);
 
-        Object.assign(sentinel.style, getSentinelPosition(stickyElement, sentinel, className));
+        Object.assign(sentinel.style, getBottomSentinelPosition(stickyElement, sentinel, className));
 
         break;
       }
@@ -171,21 +171,14 @@ function addSentinels(container, className) {
  * @returns {Object}
  */
 
-function getSentinelPosition(stickyElement, sentinel, className) {
+function getBottomSentinelPosition(stickyElement, sentinel, className) {
   const stickyStyle = window.getComputedStyle(stickyElement);
   const parentStyle = window.getComputedStyle(stickyElement.parentElement);
 
   const parentPadding = parseInt(parentStyle.paddingTop);
 
-  switch (className) {
-    case ClassName.SENTINEL_BOTTOM: {
-      return {
-        bottom: stickyStyle.top,
-        height: `${stickyElement.scrollHeight + parentPadding}px`,
-      };
-    }
-
-    default:
-      return {};
-  }
+  return {
+    bottom: stickyStyle.top,
+    height: `${stickyElement.scrollHeight + parentPadding}px`,
+  };
 }
