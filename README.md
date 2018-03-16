@@ -1,6 +1,6 @@
 # Sticky Events
 
-Event listeners for `position: sticky`.
+Events for `position: sticky`.
 
 Events:
 - `sticky-change`  Fired when an element becomes stuck or unstuck
@@ -27,14 +27,6 @@ import { observeStickyEvents, StickyEvent } from 'sticky-events/sticky-events.es
 ### Installation
 
 `npm install sticky-events --save`
-
-If you use Babel, you will need to include the `babel-plugin-transform-object-rest-spread` plugin. Your `.babelrc` should look something like:
-```json
-{
-  "presets": ["env"],
-  "plugins": ["transform-object-rest-spread"]
-}
-```
 
 
 ### Usage
@@ -74,7 +66,7 @@ If you use Babel, you will need to include the `babel-plugin-transform-object-re
 
 *Javascript*
 ```javascript
-import { observeStickyEvents, StickyEvent } from "./sticky-events.js";
+import { observeStickyEvents, StickyEvent } from "./sticky-events";
 
 
 // Add listeners to all `.sticky-events` elements on the page
