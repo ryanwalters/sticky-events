@@ -1,7 +1,6 @@
 
 /**
  * Sticky Events
- * todo: allow configuration. e.g. custom STICKY_SELECTOR
  */
 
 // Constants
@@ -62,12 +61,11 @@ function observeHeaders(container) {
         fire(false, stickyTarget);
       }
     });
-  }, {
+  }, Object.assign({
     threshold: [0],
-    ...!(container instanceof HTMLDocument) && {
-      root: container,
-    },
-  });
+  }, !(container instanceof HTMLDocument) && {
+    root: container
+  }));
 
   const sentinels = addSentinels(container, ClassName.SENTINEL_TOP);
 
@@ -99,12 +97,11 @@ function observeFooters(container) {
         fire(false, stickyTarget);
       }
     });
-  }, {
+  }, Object.assign({
     threshold: [1],
-    ...!(container instanceof HTMLDocument) && {
-      root: container,
-    },
-  });
+  }, !(container instanceof HTMLDocument) && {
+    root: container
+  }));
 
   // Add the bottom sentinels to each section and attach an observer.
 
