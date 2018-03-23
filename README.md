@@ -1,13 +1,13 @@
 # Sticky Events
 
-Events for `position: sticky`.
+Events for `position: sticky`, **without** the need for `onscroll`.
 
 Events:
 - `sticky-change`  Fired when an element becomes stuck or unstuck
 - `sticky-stuck`   Fired only when an element becomes stuck
 - `sticky-unstuck` Fired only when an element becomes unstuck
 
-Relies on `position: sticky` and `IntersectionObserver` support. No other dependencies.
+Relies on `position: sticky` and `IntersectionObserver` support.
 
 | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" /></br>IE / Edge | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" /></br>Firefox | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" /></br>Chrome | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" /></br>Safari | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png" alt="Opera" width="16px" height="16px" /></br>Opera |
 | --------- | --------- | --------- | --------- | --------- |
