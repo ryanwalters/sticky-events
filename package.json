@@ -1,6 +1,6 @@
 {
   "name": "sticky-events",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Events for `position: sticky`, without the need for `onscroll`",
   "main": "sticky-events.js",
   "scripts": {
@@ -13,7 +13,14 @@
     "type": "git",
     "url": "git+https://github.com/ryanwalters/sticky-events.git"
   },
-  "keywords": ["position", "sticky", "events", "without", "scroll", "event"],
+  "keywords": [
+    "position",
+    "sticky",
+    "events",
+    "without",
+    "scroll",
+    "event"
+  ],
   "author": "Ryan Walters <shout@ryanwalters.co> (https://ryanwalters.co)",
   "license": "MIT",
   "bugs": {
