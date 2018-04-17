@@ -189,7 +189,7 @@ function getSentinelPosition(stickyElement, sentinel, className) {
 
       return {
         bottom: stickyStyle.top,
-        height: `${stickyElement.scrollHeight + parentPadding}px`,
+        height: `${stickyElement.getBoundingClientRect().height + parentPadding}px`,
       };
   }
 }
