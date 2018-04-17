@@ -181,6 +181,7 @@ function getSentinelPosition(stickyElement, sentinel, className) {
     case ClassName.SENTINEL_TOP:
       return {
         top: `calc(${stickyStyle.getPropertyValue('top')} * -1)`,
+        height: '0'
       };
 
     case ClassName.SENTINEL_BOTTOM:
