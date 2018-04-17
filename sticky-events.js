@@ -144,6 +144,8 @@ function addSentinels(container, className) {
     switch (className) {
       case ClassName.SENTINEL_TOP: {
         stickyParent.insertBefore(sentinel, stickyElement);
+        
+        Object.assign(sentinel.style, getSentinelPosition(stickyElement, sentinel, className));
 
         break;
       }
@@ -151,7 +153,7 @@ function addSentinels(container, className) {
       case ClassName.SENTINEL_BOTTOM: {
         stickyParent.appendChild(sentinel);
 
-        Object.assign(sentinel.style, getBottomSentinelPosition(stickyElement, sentinel, className));
+        Object.assign(sentinel.style, getSentinelPosition(stickyElement, sentinel, className));
 
         break;
       }
@@ -171,14 +173,22 @@ function addSentinels(container, className) {
  * @returns {Object}
  */
 
-function getBottomSentinelPosition(stickyElement, sentinel, className) {
+function getSentinelPosition(stickyElement, sentinel, className) {
   const stickyStyle = window.getComputedStyle(stickyElement);
   const parentStyle = window.getComputedStyle(stickyElement.parentElement);
 
-  const parentPadding = parseInt(parentStyle.paddingTop);
+  switch (className) {
+    case ClassName.SENTINEL_TOP:
+      return {
+        top: `calc(${stickyStyle.getPropertyValue('top')} * -1)`,
+      };
 
-  return {
-    bottom: stickyStyle.top,
-    height: `${stickyElement.scrollHeight + parentPadding}px`,
-  };
+    case ClassName.SENTINEL_BOTTOM:
+      const parentPadding = parseInt(parentStyle.paddingTop);
+
+      return {
+        bottom: stickyStyle.top,
+        height: `${stickyElement.scrollHeight + parentPadding}px`,
+      };
+  }
 }

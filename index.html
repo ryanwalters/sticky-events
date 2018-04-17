@@ -10,8 +10,13 @@
     <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="sticky-events.css">
     <style>
+        :root {
+            --navbar-height: 70px;
+        }
+
         .container {
-            margin-top: 50px;
+            margin-top: var(--navbar-height);
+            padding-top: 50px;
         }
 
         .container > div {
@@ -20,11 +25,18 @@
 
         .sticky-events {
             color: white;
-            top: 0;
+            top: var(--navbar-height);
         }
     </style>
 </head>
 <body>
+
+<div class="navbar navbar-dark bg-primary navbar-expand-lg fixed-top">
+    <a href="" class="navbar-brand">Sticky Events</a>
+    <ul class="navbar-nav ml-auto">
+        <li><a href="https://github.com/ryanwalters/sticky-events">View on Github</a></li>
+    </ul>
+</div>
 
 <div class="container">
     <h1><a href="https://github.com/ryanwalters/sticky-events" target="_blank">Sticky Events</a></h1>
