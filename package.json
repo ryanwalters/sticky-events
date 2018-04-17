@@ -1,6 +1,6 @@
 {
   "name": "sticky-events",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Events for `position: sticky`, without the need for `onscroll`",
   "main": "sticky-events.js",
   "scripts": {
