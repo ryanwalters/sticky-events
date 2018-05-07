@@ -46,19 +46,18 @@ export function observeStickyEvents(container = document) {
 function observeHeaders(container) {
   const observer = new IntersectionObserver((records) => {
     records.forEach((record) => {
-      const targetInfo = record.boundingClientRect;
+      const { boundingClientRect, rootBounds } = record;
       const stickyParent = record.target.parentElement;
       const stickyTarget = stickyParent.querySelector(STICKY_SELECTOR);
-      const rootBoundsInfo = record.rootBounds;
 
       stickyParent.style.position = 'relative';
 
-      if (targetInfo.bottom < rootBoundsInfo.top) {
-        fire(true, stickyTarget);
+      if (boundingClientRect.bottom >= rootBounds.top && boundingClientRect.bottom < rootBounds.bottom) {
+        fire(false, stickyTarget);
       }
 
-      if (targetInfo.bottom >= rootBoundsInfo.top && targetInfo.bottom < rootBoundsInfo.bottom) {
-        fire(false, stickyTarget);
+      else if (boundingClientRect.bottom < rootBounds.top) {
+        fire(true, stickyTarget);
       }
     });
   }, Object.assign({
@@ -83,18 +82,15 @@ function observeHeaders(container) {
 function observeFooters(container) {
   const observer = new IntersectionObserver((records) => {
     records.forEach((record) => {
-      const targetInfo = record.boundingClientRect;
+      const { boundingClientRect, rootBounds } = record;
       const stickyTarget = record.target.parentElement.querySelector(STICKY_SELECTOR);
-      const rootBoundsInfo = record.rootBounds;
-      const ratio = record.intersectionRatio;
-      const bottomIntersectionLikelihood = Math.round(targetInfo.top / rootBoundsInfo.height);
 
-      if (targetInfo.bottom > rootBoundsInfo.top && ratio === 1 && bottomIntersectionLikelihood === 0) {
-        fire(true, stickyTarget);
+      if (boundingClientRect.top < rootBounds.top && boundingClientRect.bottom < rootBounds.bottom) {
+        fire(false, stickyTarget);
       }
 
-      if (targetInfo.top < rootBoundsInfo.top && targetInfo.bottom < rootBoundsInfo.bottom) {
-        fire(false, stickyTarget);
+      else if (boundingClientRect.bottom > rootBounds.top && isSticking(stickyTarget)) {
+        fire(true, stickyTarget);
       }
     });
   }, Object.assign({
@@ -192,4 +188,24 @@ function getSentinelPosition(stickyElement, sentinel, className) {
         height: `${stickyElement.getBoundingClientRect().height + parentPadding}px`,
       };
   }
+}
+
+
+/**
+ * Determine if the sticky element is currently sticking in the browser
+ *
+ * @param {Element} stickyElement
+ * @returns {boolean}
+ */
+
+function isSticking(stickyElement) {
+  const topSentinel = stickyElement.previousElementSibling;
+  
+  const stickyOffset = stickyElement.getBoundingClientRect().top;
+  const topSentinelOffset = topSentinel.getBoundingClientRect().top;
+  const difference = Math.round(Math.abs(stickyOffset - topSentinelOffset));
+
+  const topSentinelTopPosition = Math.abs(parseInt(window.getComputedStyle(topSentinel).getPropertyValue('top')));
+
+  return difference !== topSentinelTopPosition;
 }
