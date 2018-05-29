@@ -29,6 +29,12 @@ const STICKY_SELECTOR = '.sticky-events';
  */
 
 export function observeStickyEvents(container = document) {
+  if (window.self !== window.top) {
+    console.warn('StickyEvents: There are issues with using IntersectionObservers in an iframe, canceling initialization. Please see https://github.com/w3c/IntersectionObserver/issues/183');
+
+    return;
+  }
+
   window.requestAnimationFrame(() => {
     observeHeaders(container);
     observeFooters(container);
