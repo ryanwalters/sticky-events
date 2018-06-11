@@ -1,17 +1,23 @@
 # Sticky Events
 
-Events for `position: sticky`, **without** the need for `onscroll`.
+Events for `position: sticky`, without the need for an `onscroll` listener.
 
-Events:
-- `sticky-change`  Fired when an element becomes stuck or unstuck
-- `sticky-stuck`   Fired only when an element becomes stuck
-- `sticky-unstuck` Fired only when an element becomes unstuck
+### Events
 
-Relies on `position: sticky` and `IntersectionObserver` support.
+The `StickyEvent` constant has our event names:
+
+- `StickyEvent.CHANGE`  Fired when an element becomes stuck or unstuck
+- `StickyEvent.STUCK`   Fired only when an element becomes stuck
+- `StickyEvent.UNSTUCK` Fired only when an element becomes unstuck
+
+
+### Browser support
 
 | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" /></br>IE / Edge | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" /></br>Firefox | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" /></br>Chrome | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" /></br>Safari | <img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png" alt="Opera" width="16px" height="16px" /></br>Opera |
 | --------- | --------- | --------- | --------- | --------- |
 | No IE / Edge 16+ | 55+ | 56+ | [Polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill) | 43+ |
+
+Relies on `position: sticky` and `IntersectionObserver` support.
 
 ES2015+:
 ```javascript
