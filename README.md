@@ -1,6 +1,6 @@
 # Sticky Events
 
-Events for `position: sticky`, without the need for an `onscroll` listener.
+> Events for `position: sticky`, without the need for an `onscroll` listener.
 
 ### Events
 
@@ -9,6 +9,8 @@ The `StickyEvent` constant has our event names:
 - `StickyEvent.CHANGE`  Fired when an element becomes stuck or unstuck
 - `StickyEvent.STUCK`   Fired only when an element becomes stuck
 - `StickyEvent.UNSTUCK` Fired only when an element becomes unstuck
+
+*See the Javascript section of [Usage](#user-content-usage) for examples.*
 
 
 ### Browser support
