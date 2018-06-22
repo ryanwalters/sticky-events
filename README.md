@@ -74,7 +74,7 @@ import { observeStickyEvents, StickyEvent } from 'sticky-events/sticky-events.es
 
 *Javascript*
 ```javascript
-import { observeStickyEvents, StickyEvent } from "./sticky-events";
+import { observeStickyEvents, StickyEvent } from "sticky-events";
 
 
 // Add listeners to all `.sticky-events` elements on the page
