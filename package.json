@@ -2,12 +2,15 @@
   "name": "sticky-events",
   "version": "1.3.6",
   "description": "Events for `position: sticky`, without the need for `onscroll`",
-  "main": "sticky-events.js",
+  "main": "./dist/sticky-events.cjs.js",
+  "module": "./dist/sticky-events.esm.js",
+  "browser": "./dist/sticky-events.umd.js",
   "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "pretest": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/webpack --progress --colors --config webpack.config.js --watch",
-    "dist": "./node_modules/.bin/webpack --config webpack.config.js --bail",
-    "server": "./node_modules/.bin/http-server -p 3000 -c -1"
+    "server": "http-server -p 3000 -c -1"
   },
   "repository": {
     "type": "git",
@@ -28,11 +31,17 @@
   },
   "homepage": "https://github.com/ryanwalters/sticky-events#readme",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "http-server": "^0.11.1",
-    "uglifyjs-webpack-plugin": "^1.2.3",
-    "webpack": "^3.10.0"
-  }
+    "rollup": "^0.61.1",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^4.0.0"
+  },
+  "files": [
+    "dist",
+    "sticky-events.css"
+  ]
 }
