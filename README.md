@@ -21,14 +21,8 @@ The `StickyEvent` constant has our event names:
 
 Relies on `position: sticky` and `IntersectionObserver` support.
 
-ES2015+:
 ```javascript
 import { observeStickyEvents, StickyEvent } from 'sticky-events';
-```
-
-Minified ES5-compatible:
-```javascript
-import { observeStickyEvents, StickyEvent } from 'sticky-events/sticky-events.es5';
 ```
 
 
@@ -66,7 +60,7 @@ import { observeStickyEvents, StickyEvent } from 'sticky-events/sticky-events.es
 ```
 
 *CSS*
-```css
+```scss
 /* Import or copy the styles into your code */
 
 @import "~sticky-events/sticky-events.css";
