@@ -20,6 +20,37 @@ const ClassName = {
 const STICKY_SELECTOR = '.sticky-events';
 
 
+// Collection of all observers, used when needing to `unobserve` stickies
+
+const observers = [];
+
+
+/**
+ * Reset the DOM to it's pre-sticky state.
+ * This function stops observing sticky sentinels before removing them from the DOM.
+ *
+ * @param {Boolean} resetStickies   Optionally fire one last `sticky-unstick` event to reset the sticky to it's pre-sticky state
+ */
+
+export function unobserveStickyEvents(resetStickies = true) {
+  observers.forEach(({ container, observer, sentinels }) => {
+    if (resetStickies) {
+      Array.from(container.querySelectorAll(STICKY_SELECTOR)).forEach(sticky => fire(false, sticky));
+    }
+
+    sentinels.forEach((sentinel) => {
+      observer.unobserve(sentinel);
+
+      sentinel.remove();
+    });
+
+    observer = null;
+  });
+
+  observers.length = 0;
+}
+
+
 /**
  * Initialize the intersection observers on `.sticky` elements within the specified container.
  * Container defaults to `document`.
@@ -36,8 +67,8 @@ export function observeStickyEvents(container = document) {
   }
 
   window.requestAnimationFrame(() => {
-    observeHeaders(container);
-    observeFooters(container);
+    observers.push(observeHeaders(container));
+    observers.push(observeFooters(container));
   });
 }
 
@@ -47,6 +78,7 @@ export function observeStickyEvents(container = document) {
  * visible/hidden at the top of the sticky container.
  *
  * @param {Element|HTMLDocument} container
+ * @returns {{container: *, observer: IntersectionObserver, sentinels: Array<Element>}}
  */
 
 function observeHeaders(container) {
@@ -75,6 +107,12 @@ function observeHeaders(container) {
   const sentinels = addSentinels(container, ClassName.SENTINEL_TOP);
 
   sentinels.forEach(sentinel => observer.observe(sentinel));
+
+  return {
+    container,
+    observer,
+    sentinels,
+  };
 }
 
 
@@ -83,6 +121,7 @@ function observeHeaders(container) {
  * visible/hidden at the bottom of the sticky container.
  *
  * @param {Element|HTMLDocument} container
+ * @returns {{container: *, observer: IntersectionObserver, sentinels: Array<Element>}}
  */
 
 function observeFooters(container) {
@@ -110,6 +149,12 @@ function observeFooters(container) {
   const sentinels = addSentinels(container, ClassName.SENTINEL_BOTTOM);
 
   sentinels.forEach(sentinel => observer.observe(sentinel));
+
+  return {
+    container,
+    observer,
+    sentinels,
+  };
 }
 
 
@@ -146,7 +191,7 @@ function addSentinels(container, className) {
     switch (className) {
       case ClassName.SENTINEL_TOP: {
         stickyParent.insertBefore(sentinel, stickyElement);
-        
+
         Object.assign(sentinel.style, getSentinelPosition(stickyElement, sentinel, className));
 
         break;
@@ -206,7 +251,7 @@ function getSentinelPosition(stickyElement, sentinel, className) {
 
 function isSticking(stickyElement) {
   const topSentinel = stickyElement.previousElementSibling;
-  
+
   const stickyOffset = stickyElement.getBoundingClientRect().top;
   const topSentinelOffset = topSentinel.getBoundingClientRect().top;
   const difference = Math.round(Math.abs(stickyOffset - topSentinelOffset));

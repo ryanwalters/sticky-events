@@ -68,10 +68,10 @@ import { observeStickyEvents, StickyEvent } from 'sticky-events';
 
 *Javascript*
 ```javascript
-import { observeStickyEvents, StickyEvent } from "sticky-events";
+import { observeStickyEvents, unobserveStickyEvents, StickyEvent } from "sticky-events";
 
 
-// Add listeners to all `.sticky-events` elements on the page
+// Ad'sticky-events'all `.sticky-events` elements on the page
 
 observeStickyEvents();
 
@@ -93,4 +93,9 @@ stickies.forEach((sticky) => {
     console.log('unstuck');
   });
 });
+
+
+// After you're all done with your stickies, you can clean them up
+
+unobserveStickyEvents();
 ```
