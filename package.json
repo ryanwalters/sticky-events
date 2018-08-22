@@ -10,7 +10,7 @@
     "dev": "rollup -c -w",
     "pretest": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "http-server -p 3000 -c -1"
+    "start": "http-server -p 3000 -c -1"
   },
   "repository": {
     "type": "git",
