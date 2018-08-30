@@ -71,7 +71,7 @@ import { observeStickyEvents, unobserveStickyEvents, StickyEvent } from 'sticky-
 import { observeStickyEvents, unobserveStickyEvents, StickyEvent } from "sticky-events";
 
 
-// Ad'sticky-events'all `.sticky-events` elements on the page
+// Add listeners to all `.sticky-events` elements on the page
 
 observeStickyEvents();
 
