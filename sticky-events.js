@@ -38,11 +38,9 @@ export function unobserveStickyEvents(resetStickies = true) {
       Array.from(container.querySelectorAll(STICKY_SELECTOR)).forEach(sticky => fire(false, sticky));
     }
 
-    sentinels.forEach((sentinel) => {
-      observer.unobserve(sentinel);
+    sentinels.forEach(sentinel => sentinel.remove());
 
-      sentinel.remove();
-    });
+    observer.disconnect();
 
     observer = null;
   });
