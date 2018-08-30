@@ -22,7 +22,7 @@ The `StickyEvent` constant has our event names:
 Relies on `position: sticky` and `IntersectionObserver` support.
 
 ```javascript
-import { observeStickyEvents, StickyEvent } from 'sticky-events';
+import { observeStickyEvents, unobserveStickyEvents, StickyEvent } from 'sticky-events';
 ```
 
 
