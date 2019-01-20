@@ -31,14 +31,14 @@
   },
   "homepage": "https://github.com/ryanwalters/sticky-events#readme",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
     "http-server": "^0.11.1",
-    "rollup": "^0.65.0",
-    "rollup-plugin-babel": "^4.0.2",
-    "rollup-plugin-commonjs": "^9.1.6",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-uglify": "^4.0.0"
+    "rollup": "^1.1.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-uglify": "^6.0.1"
   },
   "files": [
     "dist",
