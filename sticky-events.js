@@ -88,11 +88,11 @@ function observeHeaders(container) {
 
       stickyParent.style.position = 'relative';
 
-      if (boundingClientRect.bottom >= rootBounds.top && boundingClientRect.bottom < rootBounds.bottom) {
+      if (boundingClientRect.bottom > rootBounds.top && boundingClientRect.bottom < rootBounds.bottom) {
         fire(false, stickyTarget);
       }
 
-      else if (boundingClientRect.bottom < rootBounds.top) {
+      else if (boundingClientRect.bottom <= rootBounds.top) {
         fire(true, stickyTarget);
       }
     });
