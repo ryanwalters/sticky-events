@@ -1,3 +1,8 @@
+/**
+ * Todo:
+ * - Remove the css requirement
+ * - Create StickyEvents class
+ */
 
 /**
  * Sticky Events
@@ -184,19 +189,43 @@ function addSentinels(container, className) {
     const sentinel = document.createElement('div');
     const stickyParent = stickyElement.parentElement;
 
+    // Apply styles to the sticky element
+
+    stickyElement.style.cssText = `
+      position: -webkit-sticky;
+      position: sticky;
+    `;
+
+    // Apply default sentinel styles
+
     sentinel.classList.add(ClassName.SENTINEL, className);
+
+    Object.assign(sentinel.style,{
+      left: 0,
+      position: 'absolute',
+      right: 0,
+      visibility: 'hidden',
+    });
 
     switch (className) {
       case ClassName.SENTINEL_TOP: {
         stickyParent.insertBefore(sentinel, stickyElement);
 
-        Object.assign(sentinel.style, getSentinelPosition(stickyElement, sentinel, className));
+        // Apply styles specific to the top sentinel
+
+        Object.assign(
+          sentinel.style,
+          getSentinelPosition(stickyElement, sentinel, className),
+          { position: 'relative' },
+        );
 
         break;
       }
 
       case ClassName.SENTINEL_BOTTOM: {
         stickyParent.appendChild(sentinel);
+
+        // Apply styles specific to the bottom sentinel
 
         Object.assign(sentinel.style, getSentinelPosition(stickyElement, sentinel, className));
 
