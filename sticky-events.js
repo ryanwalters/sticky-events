@@ -1,14 +1,13 @@
 /**
  * Todo:
- * - Remove the css requirement
- * - Create StickyEvents class
+ * - Allow adding new stickies to a set of stickies
+ * - Improve README (at least describe options)
  */
 
 /**
- * Sticky Events
+ * @deprecated
+ * @type {{CHANGE: string, STUCK: string, UNSTUCK: string}}
  */
-
-// Constants
 
 export const StickyEvent = {
   CHANGE: 'sticky-change',
@@ -25,22 +24,53 @@ const ClassName = {
 const STICKY_SELECTOR = '.sticky-events';
 
 
+// StickyEvents class
+
+export default class StickyEvents {
+  constructor({ container = document, stickySelector = STICKY_SELECTOR } = {}) {
+    this.container = container;
+    this.observers = [];
+    this.stickyElements = document.querySelectorAll(stickySelector);
+    this.stickySelector = stickySelector;
+
+    this.enableEvents();
+  }
+
+  enableEvents() {
+    observeStickyEvents(this.container, this.observers, this.stickySelector);
+  }
+
+  disableEvents(resetStickies = true) {
+    unobserveStickyEvents(resetStickies, this.observers, this.stickySelector);
+  }
+}
+
+// Events
+
+StickyEvents.CHANGE = StickyEvent.CHANGE;
+StickyEvents.STUCK = StickyEvent.STUCK;
+StickyEvents.UNSTUCK = StickyEvent.UNSTUCK;
+
+
 // Collection of all observers, used when needing to `unobserve` stickies
 
-const observers = [];
+const globalObservers = [];
 
 
 /**
  * Reset the DOM to it's pre-sticky state.
  * This function stops observing sticky sentinels before removing them from the DOM.
  *
- * @param {Boolean} resetStickies   Optionally fire one last `sticky-unstick` event to reset the sticky to it's pre-sticky state
+ * @deprecated
+ * @param {boolean} resetStickies     Optionally fire one last `sticky-unstick` event to reset the sticky to it's pre-sticky state
+ * @param {array<object>} observers   A collection of the elements being observed, along with their containers and sentinels (see what `observeHeaders` and `observeFooters` returns)
+ * @param {string} stickySelector     The CSS selector applied to the sticky DOM elements
  */
 
-export function unobserveStickyEvents(resetStickies = true) {
+export function unobserveStickyEvents(resetStickies = true, observers = globalObservers, stickySelector = STICKY_SELECTOR) {
   observers.forEach(({ container, observer, sentinels }) => {
     if (resetStickies) {
-      Array.from(container.querySelectorAll(STICKY_SELECTOR)).forEach(sticky => fire(false, sticky));
+      Array.from(container.querySelectorAll(stickySelector)).forEach(sticky => fire(false, sticky));
     }
 
     sentinels.forEach(sentinel => sentinel.remove());
@@ -58,21 +88,21 @@ export function unobserveStickyEvents(resetStickies = true) {
  * Initialize the intersection observers on `.sticky` elements within the specified container.
  * Container defaults to `document`.
  *
- * @export
- * @param {Element|HTMLDocument|Document} container
+ * @deprecated
+ * @param {Element|Document} container
+ * @param {string} stickySelector       The CSS selector applied to the sticky DOM elements
+ * @param {array<object>} observers     A collection of the elements being observed, along with their containers and sentinels (see what `observeHeaders` and `observeFooters` returns)
  */
 
-export function observeStickyEvents(container = document) {
+export function observeStickyEvents(container = document, observers = globalObservers, stickySelector = STICKY_SELECTOR) {
   if (window.self !== window.top) {
     console.warn('StickyEvents: There are issues with using IntersectionObservers in an iframe, canceling initialization. Please see https://github.com/w3c/IntersectionObserver/issues/183');
 
     return;
   }
 
-  window.requestAnimationFrame(() => {
-    observers.push(observeHeaders(container));
-    observers.push(observeFooters(container));
-  });
+  observers.push(observeHeaders(container, stickySelector));
+  observers.push(observeFooters(container, stickySelector));
 }
 
 
@@ -81,15 +111,16 @@ export function observeStickyEvents(container = document) {
  * visible/hidden at the top of the sticky container.
  *
  * @param {Element|HTMLDocument} container
+ * @param {string} stickySelector     The CSS selector applied to the sticky DOM elements
  * @returns {{container: *, observer: IntersectionObserver, sentinels: Array<Element>}}
  */
 
-function observeHeaders(container) {
+function observeHeaders(container, stickySelector = STICKY_SELECTOR) {
   const observer = new IntersectionObserver((records) => {
     records.forEach((record) => {
       const { boundingClientRect, rootBounds } = record;
       const stickyParent = record.target.parentElement;
-      const stickyTarget = stickyParent.querySelector(STICKY_SELECTOR);
+      const stickyTarget = stickyParent.querySelector(stickySelector);
 
       stickyParent.style.position = 'relative';
 
@@ -107,7 +138,7 @@ function observeHeaders(container) {
     root: container
   }));
 
-  const sentinels = addSentinels(container, ClassName.SENTINEL_TOP);
+  const sentinels = addSentinels(container, ClassName.SENTINEL_TOP, stickySelector);
 
   sentinels.forEach(sentinel => observer.observe(sentinel));
 
@@ -123,15 +154,16 @@ function observeHeaders(container) {
  * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_BOTTOM` become
  * visible/hidden at the bottom of the sticky container.
  *
- * @param {Element|HTMLDocument} container
+ * @param {Element|HTMLDocument} container  The DOM element that contains your sticky elements
+ * @param {string} stickySelector           The CSS selector applied to the sticky DOM elements
  * @returns {{container: *, observer: IntersectionObserver, sentinels: Array<Element>}}
  */
 
-function observeFooters(container) {
+function observeFooters(container, stickySelector = STICKY_SELECTOR) {
   const observer = new IntersectionObserver((records) => {
     records.forEach((record) => {
       const { boundingClientRect, rootBounds } = record;
-      const stickyTarget = record.target.parentElement.querySelector(STICKY_SELECTOR);
+      const stickyTarget = record.target.parentElement.querySelector(stickySelector);
 
       if (boundingClientRect.top < rootBounds.top && boundingClientRect.bottom < rootBounds.bottom) {
         fire(false, stickyTarget);
@@ -149,7 +181,7 @@ function observeFooters(container) {
 
   // Add the bottom sentinels to each section and attach an observer.
 
-  const sentinels = addSentinels(container, ClassName.SENTINEL_BOTTOM);
+  const sentinels = addSentinels(container, ClassName.SENTINEL_BOTTOM, stickySelector);
 
   sentinels.forEach(sentinel => observer.observe(sentinel));
 
@@ -181,11 +213,12 @@ function fire(isSticky, stickyTarget) {
  *
  * @param {Element|HTMLDocument} container
  * @param {String} className
+ * @param {string} stickySelector     The CSS selector applied to the sticky DOM elements
  * @returns {Array<Element>}
  */
 
-function addSentinels(container, className) {
-  return Array.from(container.querySelectorAll(STICKY_SELECTOR)).map((stickyElement) => {
+function addSentinels(container, className, stickySelector = STICKY_SELECTOR) {
+  return Array.from(container.querySelectorAll(stickySelector)).map((stickyElement) => {
     const sentinel = document.createElement('div');
     const stickyParent = stickyElement.parentElement;
 

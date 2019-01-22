@@ -4,11 +4,11 @@
 
 ### Events
 
-The `StickyEvent` constant has our event names:
+The `StickyEvents` class has constants we can use to listen for events:
 
-- `StickyEvent.CHANGE`  Fired when an element becomes stuck or unstuck
-- `StickyEvent.STUCK`   Fired only when an element becomes stuck
-- `StickyEvent.UNSTUCK` Fired only when an element becomes unstuck
+- `StickyEvents.CHANGE`  Fired when an element becomes stuck or unstuck
+- `StickyEvents.STUCK`   Fired only when an element becomes stuck
+- `StickyEvents.UNSTUCK` Fired only when an element becomes unstuck
 
 *See the Javascript section of [Usage](#user-content-usage) for examples.*
 
@@ -19,16 +19,11 @@ The `StickyEvent` constant has our event names:
 | --------- | --------- | --------- | --------- | --------- |
 | No IE / Edge 16+ | 55+ | 56+ | [Polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill) | 43+ |
 
-Relies on `position: sticky` and `IntersectionObserver` support.
-
-```javascript
-import { observeStickyEvents, unobserveStickyEvents, StickyEvent } from 'sticky-events';
-```
 
 
 ### Installation
 
-`npm install sticky-events --save`
+`npm install sticky-events`
 
 
 ### Usage
@@ -59,17 +54,44 @@ import { observeStickyEvents, unobserveStickyEvents, StickyEvent } from 'sticky-
 </div>
 ```
 
-*CSS*
-```scss
-/* Import or copy the styles into your code */
-
-@import "~sticky-events/sticky-events.css";
-```
-
 *Javascript*
 ```javascript
-import { observeStickyEvents, unobserveStickyEvents, StickyEvent } from "sticky-events";
+import StickyEvents, { observeStickyEvents, unobserveStickyEvents, StickyEvent } from "./sticky-events.js";
 
+// --- This is the new, recommended way of enabling/disabling sticky events --- //
+
+// Create new StickyEvents instance, this enables sticky events automatically
+
+const stickyEvents = new StickyEvents({
+  container: document.querySelector('.my-sticky-container'),
+  enabled: false,
+  stickySelector: '.custom-sticky-selector'
+});
+
+
+// Enable events
+
+stickyEvents.enableEvents();
+
+
+// Add event listeners
+
+const { stickyElements } = stickyEvents;
+
+stickyElements.forEach(sticky => {
+  sticky.addEventListener(StickyEvents.CHANGE, (event) => {
+    sticky.classList.toggle('bg-dark', event.detail.isSticky);
+  });
+});
+
+
+// Disable events
+
+stickyEvents.disableEvents();
+
+
+// --- This is the older, deprecated method --- //
+// NOTE: observeStickyEvents, unobserveStickyEvents, and StickyEvent are DEPRECATED, they will be removed in v3.0
 
 // Add listeners to all `.sticky-events` elements on the page
 

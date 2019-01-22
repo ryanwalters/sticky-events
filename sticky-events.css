@@ -1,5 +1,3 @@
-/*
-
 .sticky-events {
     position: -webkit-sticky;
     position: sticky;
@@ -15,4 +13,3 @@
 .sticky-events--sentinel-top {
     position: relative;
 }
-*/
