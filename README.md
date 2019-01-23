@@ -15,7 +15,7 @@
 | No IE / Edge 16+ | 55+ | 56+ | [Polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill) | 43+ |
 
 
-### Options
+## Options
 
 | Option Name      | Type                    | Default          | Description                                                         |
 | ---------------- | ----------------------- | ---------------- | ------------------------------------------------------------------- |
@@ -24,7 +24,7 @@
 | `stickySelector` | `string`                | `.sticky-events` | The selector to use to find your sticky elements within `container` |
 
 
-### Events
+## Events
 
 The `StickyEvents` class has constants we can use to listen for events.
 
@@ -35,7 +35,7 @@ The `StickyEvents` class has constants we can use to listen for events.
 | `StickyEvents.UNSTUCK` | Fired only when an element becomes unstuck     |
 
 
-### How to use
+## How to use
 
 [View demo](https://ryanwalters.github.io/sticky-events/)
 
@@ -92,7 +92,7 @@ stickyElements.forEach(sticky => {
 stickyEvents.disableEvents();
 ```
 
-#### Deprecated
+## Deprecated
 
 The following has been deprecated as of v2.3, and will be removed in v3.0:
 - `observeStickyEvents`
