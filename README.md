@@ -17,11 +17,11 @@
 
 ## Options
 
-| Option Name      | Type                    | Default          | Description                                                         |
-| ---------------- | ----------------------- | ---------------- | ------------------------------------------------------------------- |
-| `container`      | `Element` or `Document` | `document`       | The element that contains your sticky elements                      |
-| `enabled`        | `boolean`               | `true`           | Enable sticky events immediately                                    |
-| `stickySelector` | `string`                | `.sticky-events` | The selector to use to find your sticky elements within `container` |
+| Option Name      | Type                    | Default          | Description                                                                                       |
+| ---------------- | ----------------------- | ---------------- | ------------------------------------------------------------------------------------------------- |
+| `container`      | `Element` or `Document` | `document`       | The element that contains your sticky elements. Grabs all sticky elements on the page by default. |                      |
+| `enabled`        | `boolean`               | `true`           | Enable sticky events immediately                                                                  |
+| `stickySelector` | `string`                | `.sticky-events` | The selector to use to find your sticky elements within `container`                               |
 
 
 ## Events
