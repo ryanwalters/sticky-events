@@ -37,6 +37,8 @@ The `StickyEvents` class has constants we can use to listen for events.
 
 ## How to use
 
+### [View demo](https://ryanwalters.github.io/sticky-events/)
+
 Given the following HTML:
 ```html
 <div class="my-sticky-container">
@@ -89,8 +91,6 @@ stickyElements.forEach(sticky => {
 
 stickyEvents.disableEvents();
 ```
-
-### [View demo](https://ryanwalters.github.io/sticky-events/)
 
 
 ## Deprecated
