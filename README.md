@@ -90,7 +90,7 @@ stickyElements.forEach(sticky => {
 stickyEvents.disableEvents();
 ```
 
-[View demo](https://ryanwalters.github.io/sticky-events/)
+### [View demo](https://ryanwalters.github.io/sticky-events/)
 
 
 ## Deprecated
