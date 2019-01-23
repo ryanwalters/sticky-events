@@ -2,15 +2,10 @@
 
 > Events for `position: sticky`, without the need for an `onscroll` listener.
 
-### Events
 
-The `StickyEvents` class has constants we can use to listen for events:
+### Installation
 
-- `StickyEvents.CHANGE`  Fired when an element becomes stuck or unstuck
-- `StickyEvents.STUCK`   Fired only when an element becomes stuck
-- `StickyEvents.UNSTUCK` Fired only when an element becomes unstuck
-
-*See the Javascript section of [Usage](#user-content-usage) for examples.*
+`npm install sticky-events`
 
 
 ### Browser support
@@ -20,45 +15,53 @@ The `StickyEvents` class has constants we can use to listen for events:
 | No IE / Edge 16+ | 55+ | 56+ | [Polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill) | 43+ |
 
 
+### Options
 
-### Installation
+| Option Name      | Type                    | Default          | Description                                                         |
+| ---------------- | ----------------------- | ---------------- | ------------------------------------------------------------------- |
+| `container`      | `Element` or `Document` | `document`       | The element that contains your sticky elements                      |
+| `enabled`        | `boolean`               | `true`           | Enable sticky events immediately                                    |
+| `stickySelector` | `string`                | `.sticky-events` | The selector to use to find your sticky elements within `container` |
 
-`npm install sticky-events`
 
+### Events
 
-### Usage
+The `StickyEvents` class has constants we can use to listen for events.
+
+| Event Name             | Description                                    |
+| ---------------------- | ---------------------------------------------- |
+| `StickyEvents.CHANGE`  | Fired when an element becomes stuck or unstuck |
+| `StickyEvents.STUCK`   | Fired only when an element becomes stuck       |
+| `StickyEvents.UNSTUCK` | Fired only when an element becomes unstuck     |
+
+*See the Javascript section of [Usage](#user-content-usage) for examples.*
+
+### How to use
 
 [View demo](https://ryanwalters.github.io/sticky-events/)
 
-*HTML*
+Given the following HTML:
 ```html
-<div>
-    <h2 class="sticky-events">Sticky Heading 1</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</div>
-<div>
-    <h2 class="sticky-events">Sticky Heading 2</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</div>
-<div>
-    <h2 class="sticky-events">Sticky Heading 3</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</div>
-<div>
-    <h2 class="sticky-events">Sticky Heading 4</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</div>
-<div>
-    <h2 class="sticky-events">Sticky Heading 5</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<div class="my-sticky-container">
+    <div>
+        <h2 class="custom-sticky-selector">Sticky Heading 1</h2>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+    <div>
+        <h2 class="custom-sticky-selector">Sticky Heading 2</h2>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+    <div>
+        <h2 class="custom-sticky-selector">Sticky Heading 3</h2>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
 </div>
 ```
 
-*Javascript*
+We could configure `StickyEvents` like this:
 ```javascript
-import StickyEvents, { observeStickyEvents, unobserveStickyEvents, StickyEvent } from "./sticky-events.js";
+import StickyEvents from 'sticky-events';
 
-// --- This is the new, recommended way of enabling/disabling sticky events --- //
 
 // Create new StickyEvents instance, this enables sticky events automatically
 
@@ -88,36 +91,12 @@ stickyElements.forEach(sticky => {
 // Disable events
 
 stickyEvents.disableEvents();
-
-
-// --- This is the older, deprecated method --- //
-// NOTE: observeStickyEvents, unobserveStickyEvents, and StickyEvent are DEPRECATED, they will be removed in v3.0
-
-// Add listeners to all `.sticky-events` elements on the page
-
-observeStickyEvents();
-
-
-// Events are dispatched on elements with the `.sticky-events` class
-
-const stickies = Array.from(document.querySelectorAll('.sticky-events'));
-
-stickies.forEach((sticky) => {
-  sticky.addEventListener(StickyEvent.CHANGE, (event) => {
-    sticky.classList.toggle('bg-dark', event.detail.isSticky);
-  });
-
-  sticky.addEventListener(StickyEvent.STUCK, (event) => {
-    console.log('stuck');
-  });
-
-  sticky.addEventListener(StickyEvent.UNSTUCK, (event) => {
-    console.log('unstuck');
-  });
-});
-
-
-// After you're all done with your stickies, you can clean them up
-
-unobserveStickyEvents();
 ```
+
+#### Deprecated
+
+The following has been deprecated as of v2.3, and will be removed in v3.0:
+- `observeStickyEvents`
+- `unobserveStickyEvents`
+- `StickyEvent`
+- `sticky-events.css`

@@ -27,13 +27,23 @@ const STICKY_SELECTOR = '.sticky-events';
 // StickyEvents class
 
 export default class StickyEvents {
-  constructor({ container = document, stickySelector = STICKY_SELECTOR } = {}) {
+  /**
+   * Initialize a set of sticky elements with events
+   *
+   * @param {Element|Document} container
+   * @param {boolean} enabled
+   * @param {string} stickySelector
+   */
+
+  constructor({ container = document, enabled = true, stickySelector = STICKY_SELECTOR } = {}) {
     this.container = container;
     this.observers = [];
     this.stickyElements = document.querySelectorAll(stickySelector);
     this.stickySelector = stickySelector;
 
-    this.enableEvents();
+    if (enabled) {
+      this.enableEvents();
+    }
   }
 
   enableEvents() {
