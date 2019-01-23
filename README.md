@@ -20,8 +20,8 @@
 | Option Name      | Type                    | Default          | Description                                                                                       |
 | ---------------- | ----------------------- | ---------------- | ------------------------------------------------------------------------------------------------- |
 | `container`      | `Element` or `Document` | `document`       | The element that contains your sticky elements. Grabs all sticky elements on the page by default. |                      |
-| `enabled`        | `boolean`               | `true`           | Enable sticky events immediately                                                                  |
-| `stickySelector` | `string`                | `.sticky-events` | The selector to use to find your sticky elements within `container`                               |
+| `enabled`        | `boolean`               | `true`           | Enable sticky events immediately.                                                                 |
+| `stickySelector` | `string`                | `.sticky-events` | The selector to use to find your sticky elements within `container`.                              |
 
 
 ## Events
@@ -36,8 +36,6 @@ The `StickyEvents` class has constants we can use to listen for events.
 
 
 ## How to use
-
-[View demo](https://ryanwalters.github.io/sticky-events/)
 
 Given the following HTML:
 ```html
@@ -91,6 +89,9 @@ stickyElements.forEach(sticky => {
 
 stickyEvents.disableEvents();
 ```
+
+[View demo](https://ryanwalters.github.io/sticky-events/)
+
 
 ## Deprecated
 
