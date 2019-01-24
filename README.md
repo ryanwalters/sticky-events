@@ -62,7 +62,7 @@ We could configure `StickyEvents` like this:
 import StickyEvents from 'sticky-events';
 
 
-// Create new StickyEvents instance, this enables sticky events automatically
+// Create new StickyEvents instance
 
 const stickyEvents = new StickyEvents({
   container: document.querySelector('.my-sticky-container'),
