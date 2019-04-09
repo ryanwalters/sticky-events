@@ -1,6 +1,6 @@
 {
   "name": "sticky-events",
-  "version": "2.3.0",
+  "version": "3.0.0-beta.0",
   "description": "Events for `position: sticky`, without the need for `onscroll`",
   "main": "./dist/sticky-events.cjs.js",
   "module": "./dist/sticky-events.esm.js",
