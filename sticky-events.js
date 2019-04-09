@@ -213,8 +213,8 @@ function observeFooters(container, stickySelector = STICKY_SELECTOR) {
  */
 
 function fire(isSticky, stickyTarget) {
-  stickyTarget.dispatchEvent(new CustomEvent(StickyEvent.CHANGE, { detail: { isSticky } }));
-  stickyTarget.dispatchEvent(new CustomEvent(isSticky ? StickyEvent.STUCK : StickyEvent.UNSTUCK));
+  stickyTarget.dispatchEvent(new CustomEvent(StickyEvent.CHANGE, { detail: { isSticky }, bubbles: true }));
+  stickyTarget.dispatchEvent(new CustomEvent(isSticky ? StickyEvent.STUCK : StickyEvent.UNSTUCK, { bubbles: true }));
 }
 
 
