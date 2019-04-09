@@ -226,8 +226,8 @@ export default class StickyEvents {
    */
 
   fire(isSticky, stickyTarget) {
-    stickyTarget.dispatchEvent(new CustomEvent(StickyEvents.CHANGE, { detail: { isSticky } }));
-    stickyTarget.dispatchEvent(new CustomEvent(isSticky ? StickyEvents.STUCK : StickyEvents.UNSTUCK));
+    stickyTarget.dispatchEvent(new CustomEvent(StickyEvents.CHANGE, { detail: { isSticky }, bubbles: true }));
+    stickyTarget.dispatchEvent(new CustomEvent(isSticky ? StickyEvents.STUCK : StickyEvents.UNSTUCK, { bubbles: true }));
   }
 
 
