@@ -1,7 +1,6 @@
 /**
  * Todo:
  * - Allow adding new stickies to a set of stickies
- * - See if its possible to create a single IntersectionObserver and add everything to that, rather than creating a new IO for every sticky element
  */
 
 const ClassName = {
