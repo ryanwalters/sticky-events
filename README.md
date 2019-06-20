@@ -92,12 +92,3 @@ stickyElements.forEach(sticky => {
 
 stickyEvents.disableEvents();
 ```
-
-
-## Deprecated
-
-The following have been deprecated as of v2.3, and will be removed in v3.0:
-- `observeStickyEvents`
-- `unobserveStickyEvents`
-- `StickyEvent`
-- `sticky-events.css`

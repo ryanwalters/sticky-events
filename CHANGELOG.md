@@ -1,4 +1,12 @@
-## v2.3
+## 3.0.0
+
+#### Breaking changes
+
+- The `StickyEvents` class is now the only method of enabling and disabling sticky elements
+- Previously deprecated elements have been removed. See v2.3.0 `Deprecations` notes for list.
+
+
+## v2.3.0
 
 #### New Features
 
