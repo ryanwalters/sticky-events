@@ -170,9 +170,9 @@ export default class StickyEvents {
       // Apply styles to the sticky element
 
       stickyElement.style.cssText = `
-      position: -webkit-sticky;
-      position: sticky;
-    `;
+        position: -webkit-sticky;
+        position: sticky;
+      `;
 
       // Apply default sentinel styles
 
