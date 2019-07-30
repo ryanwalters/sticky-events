@@ -2,7 +2,6 @@
  * Todo:
  * - Allow adding new stickies to a set of stickies
  * - Allow bottom stickies
- * - Track state of each sticky
  */
 
 const ClassName = {
@@ -28,6 +27,11 @@ export default class StickyEvents {
     this.observers = [];
     this.stickyElements = document.querySelectorAll(stickySelector);
     this.stickySelector = stickySelector;
+    this.state = new Map();
+
+    this.stickyElements.forEach(sticky => this.state.set(sticky, {
+      isSticky: false
+    }));
 
     if (enabled) {
       this.enableEvents();
@@ -228,8 +232,22 @@ export default class StickyEvents {
    */
 
   fire(isSticky, stickyTarget) {
+    const { isSticky: previouslySticky } = this.state.get(stickyTarget);
+
+    // Don't fire any events if the new state is the same as the previous state
+
+    if (previouslySticky === isSticky) {
+      return;
+    }
+
+    // Fire some events if the state is changing
+
     stickyTarget.dispatchEvent(new CustomEvent(StickyEvents.CHANGE, { detail: { isSticky }, bubbles: true }));
     stickyTarget.dispatchEvent(new CustomEvent(isSticky ? StickyEvents.STUCK : StickyEvents.UNSTUCK, { bubbles: true }));
+
+    // Update the sticky state
+
+    this.state.set(stickyTarget, { isSticky });
   }
 
 
