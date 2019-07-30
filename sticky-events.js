@@ -29,13 +29,28 @@ export default class StickyEvents {
     this.stickySelector = stickySelector;
     this.state = new Map();
 
-    this.stickyElements.forEach(sticky => this.state.set(sticky, {
-      isSticky: false
-    }));
+    this.setState();
 
     if (enabled) {
       this.enableEvents();
     }
+  }
+
+
+  /**
+   * Set the default state for all stickies, skipping any have already had their default state set
+   */
+
+  setState() {
+    this.stickyElements.forEach((sticky) => {
+      if (this.state.get(sticky)) {
+        return;
+      }
+
+      this.state.set(sticky, {
+        isSticky: false,
+      });
+    });
   }
 
 
