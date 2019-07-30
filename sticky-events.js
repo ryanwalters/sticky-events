@@ -1,6 +1,8 @@
 /**
  * Todo:
  * - Allow adding new stickies to a set of stickies
+ * - Allow bottom stickies
+ * - Track state of each sticky
  */
 
 const ClassName = {
@@ -84,17 +86,17 @@ export default class StickyEvents {
   observeHeaders() {
     const observer = new IntersectionObserver((records) => {
       records.forEach((record) => {
-        const { boundingClientRect, rootBounds } = record;
+        const { boundingClientRect, isIntersecting, rootBounds } = record;
         const stickyParent = record.target.parentElement;
         const stickyTarget = stickyParent.querySelector(this.stickySelector);
 
         stickyParent.style.position = 'relative';
 
-        if (boundingClientRect.bottom > rootBounds.top && boundingClientRect.bottom < rootBounds.bottom) {
+        if (boundingClientRect.bottom < rootBounds.bottom && isIntersecting) {
           this.fire(false, stickyTarget);
         }
 
-        else if (boundingClientRect.bottom <= rootBounds.top) {
+        else if (boundingClientRect.bottom <= rootBounds.top && !isIntersecting) {
           this.fire(true, stickyTarget);
         }
       });
@@ -125,14 +127,14 @@ export default class StickyEvents {
   observeFooters() {
     const observer = new IntersectionObserver((records) => {
       records.forEach((record) => {
-        const { boundingClientRect, rootBounds } = record;
+        const { boundingClientRect, isIntersecting, rootBounds } = record;
         const stickyTarget = record.target.parentElement.querySelector(this.stickySelector);
 
-        if (boundingClientRect.top < rootBounds.top && boundingClientRect.bottom < rootBounds.bottom) {
+        if (boundingClientRect.top < rootBounds.top && boundingClientRect.bottom < rootBounds.bottom && !isIntersecting) {
           this.fire(false, stickyTarget);
         }
 
-        else if (boundingClientRect.bottom > rootBounds.top && this.isSticking(stickyTarget)) {
+        else if (boundingClientRect.bottom > rootBounds.top && this.isSticking(stickyTarget) && isIntersecting) {
           this.fire(true, stickyTarget);
         }
       });
@@ -248,7 +250,7 @@ export default class StickyEvents {
       case ClassName.SENTINEL_TOP:
         return {
           top: `calc(${stickyStyle.getPropertyValue('top')} * -1)`,
-          height: 0,
+          height: 1,
         };
 
       case ClassName.SENTINEL_BOTTOM:
