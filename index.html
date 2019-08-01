@@ -23,7 +23,7 @@
             height: 500px;
         }
 
-        .sticky-events {
+        .sticky-events, .dynamic-sticky {
             color: white;
             top: var(--navbar-height);
         }
@@ -34,7 +34,7 @@
 <div class="navbar navbar-dark bg-primary navbar-expand-lg fixed-top">
     <a href="" class="navbar-brand">Sticky Events</a>
     <form class="form-inline d-none d-sm-block">
-        <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="false" autocomplete="off">
+        <button id="toggle-button" type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="false" autocomplete="off">
             <div class="handle"></div>
         </button>
     </form>
@@ -43,7 +43,7 @@
     </ul>
 </div>
 
-<div class="container">
+<div class="container pb-5">
     <h1><a href="https://github.com/ryanwalters/sticky-events" target="_blank">Sticky Events</a></h1>
     <p class="lead">Events for <code>position: sticky</code>.</p>
     <div>
@@ -61,6 +61,9 @@
     <div>
         <div class="navbar bg-primary sticky-events">Sticky Heading 5</div>
     </div>
+
+    <h3 class="mt-5">Dynamically added stickies</h3>
+    <button id="add-sticky-button" class="btn btn-primary mb-5">Add Sticky</button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -87,6 +90,23 @@
     sticky.addEventListener(StickyEvents.UNSTUCK, (event) => {
       console.log('unstuck');
     });
+  });
+
+
+  // Dynamically add stickies
+
+  document.querySelector('#add-sticky-button').addEventListener('click', (e) => {
+    const $wrapper = document.createElement('div');
+    const $sticky = document.createElement('div');
+
+    $sticky.classList.add('navbar', 'bg-primary', 'sticky-events');
+    $sticky.innerText = 'Dynamic Heading';
+
+    $wrapper.appendChild($sticky);
+
+    e.currentTarget.parentNode.appendChild($wrapper);
+
+    stickyEvents.addStickies($wrapper.childNodes);
   });
 
 

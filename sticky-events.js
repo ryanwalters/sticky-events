@@ -24,6 +24,15 @@ export default class StickyEvents {
    */
 
   constructor({ container = document, enabled = true, stickySelector = '.sticky-events' } = {}) {
+    /*this.setState = this.setState.bind(this);
+    this.enableEvents = this.enableEvents.bind(this);
+    this.disableEvents = this.disableEvents.bind(this);
+    this.addStickies = this.addStickies.bind(this);
+    this.addSentinel = this.addSentinel.bind(this);
+    this.createHeaderObserver = this.createHeaderObserver.bind(this);
+    this.createFooterObserver = this.createFooterObserver.bind(this);
+    this.fire = this.fire.bind(this);*/
+
     this.container = container;
     this.observers = [];
     this.stickyElements = Array.from(document.querySelectorAll(stickySelector));
@@ -42,10 +51,10 @@ export default class StickyEvents {
    * 2. Create and observe a header sentinel
    * 3. Create and observe a footer sentinel
    *
-   * @param {HTMLElement} sticky
+   * @param {HTMLElement|Node} sticky
    */
 
-  setState(sticky, ) {
+  setState(sticky) {
     if (this.state.get(sticky)) {
       return;
     }
@@ -104,6 +113,19 @@ export default class StickyEvents {
     this.observers = null;
 
     this.state.clear();
+  }
+
+
+  /**
+   * Add more stickies to the existing set
+   *
+   * @param {NodeList} stickies
+   */
+
+  addStickies(stickies) {
+    console.dir(stickies);
+    this.stickyElements.push(...stickies);
+    this.stickyElements.forEach(sticky => this.setState(sticky));
   }
 
 
