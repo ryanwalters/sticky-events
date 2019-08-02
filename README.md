@@ -104,7 +104,15 @@ fetch('/api/gimme-divs')
   .then(response => response.text())
   .then(html => letsPretendToCreateADocument(html))
   .then((document) => {
-    stickyEvents.addStickies(document.querySelectorAll(stickySelector));
+    const stickies = document.querySelectorAll(stickySelector);
+
+    stickies.forEach(sticky => {
+      sticky.addEventListener(StickyEvents.CHANGE, (event) => {
+        sticky.classList.toggle('bg-dark', event.detail.isSticky);
+      });
+    });  
+
+    stickyEvents.addStickies(stickies);
   });
 
 // Disable events
