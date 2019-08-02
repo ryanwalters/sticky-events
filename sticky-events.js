@@ -24,15 +24,6 @@ export default class StickyEvents {
    */
 
   constructor({ container = document, enabled = true, stickySelector = '.sticky-events' } = {}) {
-    /*this.setState = this.setState.bind(this);
-    this.enableEvents = this.enableEvents.bind(this);
-    this.disableEvents = this.disableEvents.bind(this);
-    this.addStickies = this.addStickies.bind(this);
-    this.addSentinel = this.addSentinel.bind(this);
-    this.createHeaderObserver = this.createHeaderObserver.bind(this);
-    this.createFooterObserver = this.createFooterObserver.bind(this);
-    this.fire = this.fire.bind(this);*/
-
     this.container = container;
     this.observers = [];
     this.stickyElements = Array.from(document.querySelectorAll(stickySelector));
@@ -79,7 +70,7 @@ export default class StickyEvents {
       return;
     }
 
-    // Globally, create IntersectionObservers for header and footer sentinels
+    // Create IntersectionObservers for header and footer sentinels
 
     this.observers = {
       header: this.createHeaderObserver(),
@@ -117,15 +108,26 @@ export default class StickyEvents {
 
 
   /**
-   * Add more stickies to the existing set
+   * Add a list of stickies to the existing set
    *
    * @param {NodeList} stickies
    */
 
   addStickies(stickies) {
-    console.dir(stickies);
     this.stickyElements.push(...stickies);
     this.stickyElements.forEach(sticky => this.setState(sticky));
+  }
+
+
+  /**
+   * Add a single sticky to the existing set
+   *
+   * @param {Node} sticky
+   */
+
+  addSticky(sticky) {
+    this.stickyElements.push(sticky);
+    this.setState(sticky);
   }
 
 
@@ -197,7 +199,7 @@ export default class StickyEvents {
    * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_TOP` become
    * visible/hidden at the top of the sticky container.
    *
-   * @returns IntersectionObserver
+   * @returns {IntersectionObserver}
    */
 
   createHeaderObserver() {
@@ -229,7 +231,7 @@ export default class StickyEvents {
    * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_BOTTOM` become
    * visible/hidden at the bottom of the sticky container.
    *
-   * @returns IntersectionObserver
+   * @returns {IntersectionObserver}
    */
 
   createFooterObserver() {
