@@ -174,6 +174,8 @@ export default class StickyEvents {
           { position: 'relative' },
         );
 
+        // Observe the sentinel
+
         this.observers.header.observe(sentinel);
 
         break;
@@ -185,6 +187,8 @@ export default class StickyEvents {
         // Apply styles specific to the bottom sentinel
 
         Object.assign(sentinel.style, this.getSentinelPosition(sticky, sentinel, className));
+
+        // Observe the sentinel
 
         this.observers.footer.observe(sentinel);
 
