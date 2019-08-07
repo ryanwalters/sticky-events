@@ -2,6 +2,8 @@
  * Todo:
  * - Allow adding new stickies to a set of stickies
  * - Allow bottom stickies
+ * - Allow deleting stickies? Is this needed?
+ * - Add tests...
  */
 
 const ClassName = {
@@ -25,11 +27,9 @@ export default class StickyEvents {
   constructor({ container = document, enabled = true, stickySelector = '.sticky-events' } = {}) {
     this.container = container;
     this.observers = [];
-    this.stickyElements = document.querySelectorAll(stickySelector);
+    this.stickyElements = Array.from(document.querySelectorAll(stickySelector));
     this.stickySelector = stickySelector;
     this.state = new Map();
-
-    this.setState();
 
     if (enabled) {
       this.enableEvents();
@@ -38,18 +38,23 @@ export default class StickyEvents {
 
 
   /**
-   * Set the default state for all stickies, skipping any have already had their default state set
+   * Initialize the state for a sticky:
+   * 1. Default isSticky to false
+   * 2. Create and observe a header sentinel
+   * 3. Create and observe a footer sentinel
+   *
+   * @param {HTMLElement|Node} sticky
    */
 
-  setState() {
-    this.stickyElements.forEach((sticky) => {
-      if (this.state.get(sticky)) {
-        return;
-      }
+  setState(sticky) {
+    if (this.state.get(sticky)) {
+      return;
+    }
 
-      this.state.set(sticky, {
-        isSticky: false,
-      });
+    this.state.set(sticky, {
+      isSticky: false,
+      headerSentinel: this.addSentinel(sticky, ClassName.SENTINEL_TOP),
+      footerSentinel: this.addSentinel(sticky, ClassName.SENTINEL_BOTTOM),
     });
   }
 
@@ -66,32 +71,128 @@ export default class StickyEvents {
       return;
     }
 
-    this.observers.push(this.observeHeaders());
-    this.observers.push(this.observeFooters());
+    // Create IntersectionObservers for header and footer sentinels
+
+    this.observers = {
+      header: this.createHeaderObserver(),
+      footer: this.createFooterObserver(),
+    };
+
+    // Then, initialize the sticky's state
+
+    this.stickyElements.forEach((sticky) => {
+      this.setState(sticky);
+    });
   }
 
 
   /**
    * Reset the DOM to it's pre-sticky state.
-   * This function stops observing sticky sentinels before removing them from the DOM.
+   * 1. (Optionally) Fire a sticky-unstuck event on all stickies to reset them to their original unstuck state
+   * 2. Disconnect and remove IntersectionObservers
+   * 3. Clear out the global state
    *
-   * @param {boolean} resetStickies     Optionally fire one last `sticky-unstick` event to reset the sticky to it's pre-sticky state
+   * @param {boolean} resetStickies
    */
 
   disableEvents(resetStickies = true) {
-    this.observers.forEach(({ observer, sentinels }) => {
-      if (resetStickies) {
-        this.stickyElements.forEach(sticky => this.fire(false, sticky));
-      }
+    if (resetStickies) {
+      this.stickyElements.forEach(sticky => this.fire(false, sticky));
+    }
 
-      sentinels.forEach(sentinel => sentinel.remove());
+    Object.values(this.observers).forEach(observer => observer.disconnect());
 
-      observer.disconnect();
+    this.observers = null;
 
-      observer = null;
+    this.state.clear();
+  }
+
+
+  /**
+   * Add a list of stickies to the existing set
+   *
+   * @param {NodeList} stickies
+   */
+
+  addStickies(stickies) {
+    this.stickyElements.push(...stickies);
+    this.stickyElements.forEach(sticky => this.setState(sticky));
+  }
+
+
+  /**
+   * Add a single sticky to the existing set
+   *
+   * @param {Node} sticky
+   */
+
+  addSticky(sticky) {
+    this.stickyElements.push(sticky);
+    this.setState(sticky);
+  }
+
+
+  /**
+   * Create and observe a sentinel for given sticky. Type of sentinel is determined by className.
+   *
+   * @param {HTMLElement} sticky
+   * @param {string} className
+   * @returns {Element}
+   */
+
+  addSentinel(sticky, className) {
+    const sentinel = document.createElement('div');
+    const stickyParent = sticky.parentElement;
+
+    // Apply styles to the sticky element
+
+    sticky.style.cssText = `
+        position: -webkit-sticky;
+        position: sticky;
+      `;
+
+    // Apply default sentinel styles
+
+    sentinel.classList.add(ClassName.SENTINEL, className);
+
+    Object.assign(sentinel.style,{
+      left: 0,
+      position: 'absolute',
+      right: 0,
+      visibility: 'hidden',
     });
 
-    this.observers.length = 0;
+    switch (className) {
+      case ClassName.SENTINEL_TOP: {
+        stickyParent.insertBefore(sentinel, sticky);
+
+        // Apply styles specific to the top sentinel
+
+        Object.assign(
+          sentinel.style,
+          this.getSentinelPosition(sticky, sentinel, className),
+          { position: 'relative' },
+        );
+
+        this.observers.header.observe(sentinel);
+
+        break;
+      }
+
+      case ClassName.SENTINEL_BOTTOM: {
+        stickyParent.appendChild(sentinel);
+
+        // Apply styles specific to the bottom sentinel
+
+        Object.assign(sentinel.style, this.getSentinelPosition(sticky, sentinel, className));
+
+        this.observers.footer.observe(sentinel);
+
+        break;
+      }
+    }
+
+    return sentinel;
   }
 
 
@@ -99,11 +200,11 @@ export default class StickyEvents {
    * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_TOP` become
    * visible/hidden at the top of the sticky container.
    *
-   * @returns {{observer: IntersectionObserver, sentinels: Array<Element>}}
+   * @returns {IntersectionObserver}
    */
 
-  observeHeaders() {
-    const observer = new IntersectionObserver((records) => {
+  createHeaderObserver() {
+    return new IntersectionObserver((records) => {
       records.forEach((record) => {
         const { boundingClientRect, isIntersecting, rootBounds } = record;
         const stickyParent = record.target.parentElement;
@@ -124,15 +225,6 @@ export default class StickyEvents {
     }, !(this.container instanceof HTMLDocument) && {
       root: this.container
     }));
-
-    const sentinels = this.addSentinels(ClassName.SENTINEL_TOP);
-
-    sentinels.forEach(sentinel => observer.observe(sentinel));
-
-    return {
-      observer,
-      sentinels,
-    };
   }
 
 
@@ -140,11 +232,11 @@ export default class StickyEvents {
    * Sets up an intersection observer to notify `document` when elements with the `ClassName.SENTINEL_BOTTOM` become
    * visible/hidden at the bottom of the sticky container.
    *
-   * @returns {{container: *, observer: IntersectionObserver, sentinels: Array<Element>}}
+   * @returns {IntersectionObserver}
    */
 
-  observeFooters() {
-    const observer = new IntersectionObserver((records) => {
+  createFooterObserver() {
+    return new IntersectionObserver((records) => {
       records.forEach((record) => {
         const { boundingClientRect, isIntersecting, rootBounds } = record;
         const stickyTarget = record.target.parentElement.querySelector(this.stickySelector);
@@ -162,78 +254,6 @@ export default class StickyEvents {
     }, !(this.container instanceof HTMLDocument) && {
       root: this.container
     }));
-
-    // Add the bottom sentinels to each section and attach an observer.
-
-    const sentinels = this.addSentinels(ClassName.SENTINEL_BOTTOM);
-
-    sentinels.forEach(sentinel => observer.observe(sentinel));
-
-    return {
-      observer,
-      sentinels,
-    };
-  }
-
-
-  /**
-   * Add sticky sentinels
-   *
-   * @param {String} className
-   * @returns {Array<Element>}
-   */
-
-  addSentinels(className) {
-    return Array.from(this.stickyElements).map((stickyElement) => {
-      const sentinel = document.createElement('div');
-      const stickyParent = stickyElement.parentElement;
-
-      // Apply styles to the sticky element
-
-      stickyElement.style.cssText = `
-        position: -webkit-sticky;
-        position: sticky;
-      `;
-
-      // Apply default sentinel styles
-
-      sentinel.classList.add(ClassName.SENTINEL, className);
-
-      Object.assign(sentinel.style,{
-        left: 0,
-        position: 'absolute',
-        right: 0,
-        visibility: 'hidden',
-      });
-
-      switch (className) {
-        case ClassName.SENTINEL_TOP: {
-          stickyParent.insertBefore(sentinel, stickyElement);
-
-          // Apply styles specific to the top sentinel
-
-          Object.assign(
-            sentinel.style,
-            this.getSentinelPosition(stickyElement, sentinel, className),
-            { position: 'relative' },
-          );
-
-          break;
-        }
-
-        case ClassName.SENTINEL_BOTTOM: {
-          stickyParent.appendChild(sentinel);
-
-          // Apply styles specific to the bottom sentinel
-
-          Object.assign(sentinel.style, this.getSentinelPosition(stickyElement, sentinel, className));
-
-          break;
-        }
-      }
-
-      return sentinel;
-    });
   }
 
 

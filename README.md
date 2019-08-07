@@ -14,7 +14,7 @@
 | --------- | --------- | --------- | --------- | --------- |
 | No IE / Edge 16+ | 55+ | 56+ | 12.1+ | 43+ |
 
-A [Polyfill is also available](https://github.com/w3c/IntersectionObserver/tree/master/polyfill).
+A Polyfill for IntersectionObserver is [available here](https://github.com/w3c/IntersectionObserver/tree/master/polyfill).
 
 ## Options
 
@@ -34,6 +34,16 @@ The `StickyEvents` class has constants we can use to listen for events.
 | `StickyEvents.CHANGE`  | Fired when an element becomes stuck or unstuck |
 | `StickyEvents.STUCK`   | Fired only when an element becomes stuck       |
 | `StickyEvents.UNSTUCK` | Fired only when an element becomes unstuck     |
+
+
+## Methods
+
+| Method Name       | Arguments             | Description                                               |
+| ----------------- | --------------------- | --------------------------------------------------------- |
+| `addSticky`       | `Node` or `Element`   | Add a single sticky to the existing set of stickies       |
+| `addStickies`     | `NodeList` or `array` | Add a list of stickies to the existing set of stickies    |
+| `disableEvents`   | `boolean`             | Stop firing events on the set of stickies. By default, this will fire a `StickyEvents.UNSTUCK` event on the sticky elements, resetting them to their original state. Pass `false` to leave the stickies alone. |
+| `enableEvents`    | *none*                | Start firing events on the set of stickies                |
 
 
 ## How to use
@@ -79,7 +89,7 @@ stickyEvents.enableEvents();
 
 // Add event listeners
 
-const { stickyElements } = stickyEvents;
+const { stickyElements, stickySelector } = stickyEvents;
 
 stickyElements.forEach(sticky => {
   sticky.addEventListener(StickyEvents.CHANGE, (event) => {
@@ -87,6 +97,23 @@ stickyElements.forEach(sticky => {
   });
 });
 
+
+// Add stickies at some point after initialization
+
+fetch('/api/gimme-divs')
+  .then(response => response.text())
+  .then(html => letsPretendToCreateADocument(html))
+  .then((document) => {
+    const stickies = document.querySelectorAll(stickySelector);
+
+    stickies.forEach(sticky => {
+      sticky.addEventListener(StickyEvents.CHANGE, (event) => {
+        sticky.classList.toggle('bg-dark', event.detail.isSticky);
+      });
+    });  
+
+    stickyEvents.addStickies(stickies);
+  });
 
 // Disable events
 

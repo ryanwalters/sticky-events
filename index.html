@@ -23,7 +23,7 @@
             height: 500px;
         }
 
-        .sticky-events {
+        .sticky-events, .dynamic-sticky {
             color: white;
             top: var(--navbar-height);
         }
@@ -34,7 +34,7 @@
 <div class="navbar navbar-dark bg-primary navbar-expand-lg fixed-top">
     <a href="" class="navbar-brand">Sticky Events</a>
     <form class="form-inline d-none d-sm-block">
-        <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="false" autocomplete="off">
+        <button id="toggle-button" type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="false" autocomplete="off">
             <div class="handle"></div>
         </button>
     </form>
@@ -43,7 +43,7 @@
     </ul>
 </div>
 
-<div class="container">
+<div class="container" style="padding-bottom: 100px;">
     <h1><a href="https://github.com/ryanwalters/sticky-events" target="_blank">Sticky Events</a></h1>
     <p class="lead">Events for <code>position: sticky</code>.</p>
     <div>
@@ -52,15 +52,14 @@
     <div>
         <div class="navbar bg-primary sticky-events">Sticky Heading 2</div>
     </div>
-    <div>
+    <div style="height: 200px;">
         <div class="navbar bg-primary sticky-events">Sticky Heading 3</div>
     </div>
-    <div>
-        <div class="navbar bg-primary sticky-events">Sticky Heading 4</div>
-    </div>
-    <div>
-        <div class="navbar bg-primary sticky-events">Sticky Heading 5</div>
-    </div>
+
+    <hr class="mt-5">
+    <h3 class="mt-3">Dynamically added stickies</h3>
+    <p class="lead">Easily add more sticky elements later with <code>addStickies</code>.</p>
+    <button id="add-sticky-button" class="btn btn-primary mb-5">Add Sticky</button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -90,7 +89,35 @@
   });
 
 
-  // When we're done, unobserve all of our stickies
+  // Dynamically add stickies
+
+  document.querySelector('#add-sticky-button').addEventListener('click', (e) => {
+    // Create your elements however you want
+    // Quick and dirty here, skip down to the next comment for the important bit
+
+    const wrapper = document.createElement('div');
+    const sticky = document.createElement('div');
+
+    sticky.classList.add('navbar', 'bg-primary', 'sticky-events');
+    sticky.innerText = 'Dynamically Added Heading';
+
+    wrapper.appendChild(sticky);
+
+    e.currentTarget.parentNode.appendChild(wrapper);
+
+    sticky.addEventListener(StickyEvents.CHANGE, (event) => {
+      sticky.classList.toggle('bg-dark', event.detail.isSticky);
+    });
+
+    // Once you have your element, call `addSticky`
+    // If you have more than one sticky, you can use `addStickies` which expects an array-like argument (NodeList, Array)
+
+    stickyEvents.addSticky(sticky);
+  });
+
+
+  // You can also disable all of your stickies, reverting them to their original state
+  // If you don't want them to revert to their original state, pass "false" to disableEvents
 
   document.querySelector('.btn').addEventListener('click', (e) => {
     e.currentTarget.classList.contains('active') ? stickyEvents.disableEvents() : stickyEvents.enableEvents();

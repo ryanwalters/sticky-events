@@ -1,3 +1,9 @@
+## 3.1.0-beta.0
+
+#### New Features
+
+- Add `addSticky`, `addStickies` methods
+
 ## 3.0.0
 
 #### Breaking changes
@@ -11,9 +17,9 @@
 #### New Features
 
 - The new `StickyEvents` class is now the preferred method of enabling and disabling sticky elements.
-- Added `container` option. Defaults to `document`
-- Added `enabled` option. Defaults to `true`
-- Added `stickySelector` option. Defaults to `.sticky-events`
+- Add `container` option. Defaults to `document`
+- Add `enabled` option. Defaults to `true`
+- Add `stickySelector` option. Defaults to `.sticky-events`
   
 Example:
 ```js
