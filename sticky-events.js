@@ -2,6 +2,7 @@
  * Todo:
  * - Allow adding new stickies to a set of stickies
  * - Allow bottom stickies
+ * - Allow deleting stickies? Is this needed?
  * - Add tests...
  */
 
