@@ -27,7 +27,7 @@ export default class StickyEvents {
   constructor({ container = document, enabled = true, stickySelector = '.sticky-events' } = {}) {
     this.container = container;
     this.observers = [];
-    this.stickyElements = Array.from(document.querySelectorAll(stickySelector));
+    this.stickyElements = Array.from(this.container.querySelectorAll(stickySelector));
     this.stickySelector = stickySelector;
     this.state = new Map();
 
