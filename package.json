@@ -13,8 +13,8 @@
     "pretest": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "serve",
-    "prepublishOnly": "npm run build",
-    "postpublish": "git push --follow-tags"
+    "prepublishOnly": "git pull --rebase && npm run build",
+    "postpublish": "npm version $(node -p \"require('./package.json').version\") && git push --follow-tags"
   },
   "repository": {
     "type": "git",
@@ -59,7 +59,10 @@
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
-    ]
+    ],
+    "rules": {
+      "header-max-length": [0, "always"]
+    }
   },
   "husky": {
     "hooks": {
