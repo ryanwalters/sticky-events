@@ -5,7 +5,7 @@
 
 ### Installation
 
-`npm install sticky-events`
+`$ npm install sticky-events`
 
 
 ### Browser support
