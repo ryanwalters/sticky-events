@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [3.1.3](https://github.com/ryanwalters/sticky-events/compare/v3.1.2...v3.1.3) (2020-02-22)
+
+Testing out semi-automated releases!
+
+### Refactor
+- Remove unnecessary `forEach` from sentinel observers
+
 ## 3.1.0
 
 #### New Features
@@ -11,7 +22,6 @@
 - The `StickyEvents` class is now the only method of enabling and disabling sticky elements
 - Previously deprecated elements have been removed. See v2.3.0 `Deprecations` notes for list.
 
-
 ## v2.3.0
 
 #### New Features
@@ -20,17 +30,18 @@
 - Add `container` option. Defaults to `document`
 - Add `enabled` option. Defaults to `true`
 - Add `stickySelector` option. Defaults to `.sticky-events`
-  
+
 Example:
+
 ```js
-import StickyEvents from 'sticky-events';
+import StickyEvents from "sticky-events";
 
 // Create new StickyEvents instance, this enables sticky events automatically
 
 const stickyEvents = new StickyEvents({
-  container: document.querySelector('.my-sticky-container'),
+  container: document.querySelector(".my-sticky-container"),
   enabled: false,
-  stickySelector: '.custom-sticky-selector'
+  stickySelector: ".custom-sticky-selector"
 });
 
 // Enable events
@@ -42,8 +53,8 @@ stickyEvents.enableEvents();
 const { stickyElements } = stickyEvents;
 
 stickyElements.forEach(sticky => {
-  sticky.addEventListener(StickyEvents.CHANGE, (event) => {
-    sticky.classList.toggle('bg-dark', event.detail.isSticky);
+  sticky.addEventListener(StickyEvents.CHANGE, event => {
+    sticky.classList.toggle("bg-dark", event.detail.isSticky);
   });
 });
 
@@ -51,7 +62,6 @@ stickyElements.forEach(sticky => {
 
 stickyEvents.disableEvents();
 ```
-
 
 #### Deprecations
 
