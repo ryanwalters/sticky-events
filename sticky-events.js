@@ -147,9 +147,9 @@ export default class StickyEvents {
     // Apply styles to the sticky element
 
     sticky.style.cssText = `
-        position: -webkit-sticky;
-        position: sticky;
-      `;
+      position: -webkit-sticky;
+      position: sticky;
+    `;
 
     // Apply default sentinel styles
 
@@ -208,24 +208,22 @@ export default class StickyEvents {
    */
 
   createHeaderObserver() {
-    return new IntersectionObserver((records) => {
-      records.forEach((record) => {
-        const { boundingClientRect, isIntersecting, rootBounds } = record;
-        const stickyParent = record.target.parentElement;
-        const stickyTarget = stickyParent.querySelector(this.stickySelector);
+    return new IntersectionObserver(([record]) => {
+      const { boundingClientRect, isIntersecting, rootBounds } = record;
+      const stickyParent = record.target.parentElement;
+      const stickyTarget = stickyParent.querySelector(this.stickySelector);
 
-        stickyParent.style.position = 'relative';
+      stickyParent.style.position = 'relative';
 
-        if (boundingClientRect.bottom < rootBounds.bottom && isIntersecting) {
-          this.fire(false, stickyTarget);
-        }
+      if (boundingClientRect.bottom < rootBounds.bottom && isIntersecting) {
+        this.fire(false, stickyTarget);
+      }
 
-        else if (boundingClientRect.bottom <= rootBounds.top && !isIntersecting) {
-          this.fire(true, stickyTarget);
-        }
-      });
+      else if (boundingClientRect.bottom <= rootBounds.top && !isIntersecting) {
+        this.fire(true, stickyTarget);
+      }
     }, Object.assign({
-      threshold: [0],
+      threshold: 0,
     }, !(this.container instanceof HTMLDocument) && {
       root: this.container
     }));
@@ -240,21 +238,19 @@ export default class StickyEvents {
    */
 
   createFooterObserver() {
-    return new IntersectionObserver((records) => {
-      records.forEach((record) => {
-        const { boundingClientRect, isIntersecting, rootBounds } = record;
-        const stickyTarget = record.target.parentElement.querySelector(this.stickySelector);
+    return new IntersectionObserver(([record]) => {
+      const { boundingClientRect, isIntersecting, rootBounds } = record;
+      const stickyTarget = record.target.parentElement.querySelector(this.stickySelector);
 
-        if (boundingClientRect.top < rootBounds.top && boundingClientRect.bottom < rootBounds.bottom && !isIntersecting) {
-          this.fire(false, stickyTarget);
-        }
+      if (boundingClientRect.top < rootBounds.top && boundingClientRect.bottom < rootBounds.bottom && !isIntersecting) {
+        this.fire(false, stickyTarget);
+      }
 
-        else if (boundingClientRect.bottom > rootBounds.top && this.isSticking(stickyTarget) && isIntersecting) {
-          this.fire(true, stickyTarget);
-        }
-      });
+      else if (boundingClientRect.bottom > rootBounds.top && this.isSticking(stickyTarget) && isIntersecting) {
+        this.fire(true, stickyTarget);
+      }
     }, Object.assign({
-      threshold: [1],
+      threshold: 1,
     }, !(this.container instanceof HTMLDocument) && {
       root: this.container
     }));
