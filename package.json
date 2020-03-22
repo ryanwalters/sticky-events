@@ -40,7 +40,7 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "husky": "^4.2.3",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.1",
     "rimraf": "^3.0.2",
     "rollup": "^1.29.0",
     "rollup-plugin-babel": "^4.3.3",
