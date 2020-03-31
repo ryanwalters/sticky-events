@@ -2,11 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/ryanwalters/sticky-events/compare/v3.1.2...v3.2.0) (2020-03-31)
+
+### Features
+
+- Pass sticky position back in event ([1e7e04f](https://github.com/ryanwalters/sticky-events/commit/1e7e04f6c5141a7f4f0ef8e2dd80b040a3b591d4))
+- Normalize event data ([1e7e04f](https://github.com/ryanwalters/sticky-events/commit/1e7e04f6c5141a7f4f0ef8e2dd80b040a3b591d4))
+
+The data passed back in `StickyEvents.CHANGE`, `StickyEvents.STUCK`, and `StickyEvents.UNSTUCK` is now consistent.
+
+The `event.detail` now looks like:
+```
+{
+  isSticky: Boolean,
+  position: StickyEvents.POSITION_BOTTOM|StickyEvents.POSITION_TOP,
+}
+```
+
 ### [3.1.3](https://github.com/ryanwalters/sticky-events/compare/v3.1.2...v3.1.3) (2020-02-22)
 
 Testing out semi-automated releases!
 
 ### Refactor
+
 - Remove unnecessary `forEach` from sentinel observers
 
 ## 3.1.0
