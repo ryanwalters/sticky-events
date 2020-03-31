@@ -4,13 +4,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [3.3.0](https://github.com/ryanwalters/sticky-events/compare/v3.1.2...v3.3.0) (2020-03-31)
 
-
-### Features
-
-* pass sticky position back in event; normalize event data ([edee32c](https://github.com/ryanwalters/sticky-events/commit/edee32cbbb252772a3ae6b8cd4364e5b08805f87))
-
-## [3.2.0](https://github.com/ryanwalters/sticky-events/compare/v3.1.2...v3.2.0) (2020-03-31)
-
 ### Features
 
 - Pass sticky position back in event ([1e7e04f](https://github.com/ryanwalters/sticky-events/commit/1e7e04f6c5141a7f4f0ef8e2dd80b040a3b591d4))
@@ -19,6 +12,7 @@ All notable changes to this project will be documented in this file. See [standa
 The data passed back in `StickyEvents.CHANGE`, `StickyEvents.STUCK`, and `StickyEvents.UNSTUCK` is now consistent.
 
 The `event.detail` now looks like:
+
 ```
 {
   isSticky: Boolean,
@@ -66,7 +60,7 @@ import StickyEvents from "sticky-events";
 const stickyEvents = new StickyEvents({
   container: document.querySelector(".my-sticky-container"),
   enabled: false,
-  stickySelector: ".custom-sticky-selector"
+  stickySelector: ".custom-sticky-selector",
 });
 
 // Enable events
@@ -77,8 +71,8 @@ stickyEvents.enableEvents();
 
 const { stickyElements } = stickyEvents;
 
-stickyElements.forEach(sticky => {
-  sticky.addEventListener(StickyEvents.CHANGE, event => {
+stickyElements.forEach((sticky) => {
+  sticky.addEventListener(StickyEvents.CHANGE, (event) => {
     sticky.classList.toggle("bg-dark", event.detail.isSticky);
   });
 });
