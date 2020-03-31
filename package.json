@@ -50,12 +50,6 @@
     "serve": "^11.3.0",
     "standard-version": "^7.1.0"
   },
-  "standard-version": {
-    "skip": {
-      "commit": true,
-      "tag": true
-    }
-  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
