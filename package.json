@@ -14,7 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "serve",
     "prepublishOnly": "git pull --rebase && npm run build",
-    "postpublish": "npm version $(node -p \"require('./package.json').version\") && git push --follow-tags"
+    "postpublish": "git push --follow-tags"
   },
   "repository": {
     "type": "git",
