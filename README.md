@@ -35,6 +35,14 @@ The `StickyEvents` class has constants we can use to listen for events.
 | `StickyEvents.STUCK`   | Fired only when an element becomes stuck       |
 | `StickyEvents.UNSTUCK` | Fired only when an element becomes unstuck     |
 
+When an event is fired, the following data is available from the `event.detail` property:
+```
+{
+  isSticky: Boolean,
+  position: StickyEvents.POSITION_BOTTOM|StickyEvents.POSITION_TOP,
+}
+```
+
 
 ## Methods
 

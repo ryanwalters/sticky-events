@@ -216,11 +216,11 @@ export default class StickyEvents {
       stickyParent.style.position = 'relative';
 
       if (boundingClientRect.bottom < rootBounds.bottom && isIntersecting) {
-        this.fire(false, stickyTarget);
+        this.fire(false, stickyTarget, StickyEvents.POSITION_TOP);
       }
 
       else if (boundingClientRect.bottom <= rootBounds.top && !isIntersecting) {
-        this.fire(true, stickyTarget);
+        this.fire(true, stickyTarget, StickyEvents.POSITION_TOP);
       }
     }, Object.assign({
       threshold: 0,
@@ -243,11 +243,11 @@ export default class StickyEvents {
       const stickyTarget = record.target.parentElement.querySelector(this.stickySelector);
 
       if (boundingClientRect.top < rootBounds.top && boundingClientRect.bottom < rootBounds.bottom && !isIntersecting) {
-        this.fire(false, stickyTarget);
+        this.fire(false, stickyTarget, StickyEvents.POSITION_BOTTOM);
       }
 
       else if (boundingClientRect.bottom > rootBounds.top && this.isSticking(stickyTarget) && isIntersecting) {
-        this.fire(true, stickyTarget);
+        this.fire(true, stickyTarget, StickyEvents.POSITION_BOTTOM);
       }
     }, Object.assign({
       threshold: 1,
@@ -264,9 +264,10 @@ export default class StickyEvents {
    *
    * @param {Boolean} isSticky
    * @param {Element} stickyTarget
+   * @param {StickyEvents.POSITION_BOTTOM|StickyEvents.POSITION_TOP} position
    */
 
-  fire(isSticky, stickyTarget) {
+  fire(isSticky, stickyTarget, position) {
     const { isSticky: previouslySticky } = this.state.get(stickyTarget);
 
     // Don't fire any events if the new state is the same as the previous state
@@ -277,8 +278,8 @@ export default class StickyEvents {
 
     // Fire some events if the state is changing
 
-    stickyTarget.dispatchEvent(new CustomEvent(StickyEvents.CHANGE, { detail: { isSticky }, bubbles: true }));
-    stickyTarget.dispatchEvent(new CustomEvent(isSticky ? StickyEvents.STUCK : StickyEvents.UNSTUCK, { bubbles: true }));
+    stickyTarget.dispatchEvent(new CustomEvent(StickyEvents.CHANGE, { detail: { isSticky, position }, bubbles: true }));
+    stickyTarget.dispatchEvent(new CustomEvent(isSticky ? StickyEvents.STUCK : StickyEvents.UNSTUCK, { detail: { isSticky, position }, bubbles: true }));
 
     // Update the sticky state
 
@@ -342,3 +343,8 @@ export default class StickyEvents {
 StickyEvents.CHANGE = 'sticky-change';
 StickyEvents.STUCK = 'sticky-stuck';
 StickyEvents.UNSTUCK = 'sticky-unstuck';
+
+// Position
+
+StickyEvents.POSITION_BOTTOM = 'bottom';
+StickyEvents.POSITION_TOP = 'top';

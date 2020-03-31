@@ -79,12 +79,12 @@
       sticky.classList.toggle('bg-dark', event.detail.isSticky);
     });
 
-    sticky.addEventListener(StickyEvents.STUCK, (event) => {
-      console.log('stuck');
+    sticky.addEventListener(StickyEvents.STUCK, ({ detail: { position }}) => {
+      console.log(sticky.textContent, 'stuck from', position);
     });
 
-    sticky.addEventListener(StickyEvents.UNSTUCK, (event) => {
-      console.log('unstuck');
+    sticky.addEventListener(StickyEvents.UNSTUCK, ({ detail: { position }}) => {
+      console.log(sticky.textContent, 'unstuck from', position);
     });
   });
 
@@ -105,8 +105,9 @@
 
     e.currentTarget.parentNode.appendChild(wrapper);
 
-    sticky.addEventListener(StickyEvents.CHANGE, (event) => {
-      sticky.classList.toggle('bg-dark', event.detail.isSticky);
+    sticky.addEventListener(StickyEvents.CHANGE, ({ detail: { isSticky, position }}) => {
+      sticky.classList.toggle('bg-dark', isSticky);
+      console.log(sticky.textContent, isSticky ? 'stuck' : 'unstuck', 'from', position);
     });
 
     // Once you have your element, call `addSticky`
