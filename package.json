@@ -48,7 +48,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-uglify": "^6.0.4",
     "serve": "^11.3.0",
-    "standard-version": "^7.1.0"
+    "standard-version": "^8.0.0"
   },
   "commitlint": {
     "extends": [
