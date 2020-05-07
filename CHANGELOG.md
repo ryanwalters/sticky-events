@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.3.1](https://github.com/ryanwalters/sticky-events/compare/v3.3.0...v3.3.1) (2020-05-07)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/core from 7.9.0 to 7.9.6 ([5e11179](https://github.com/ryanwalters/sticky-events/commit/5e1117900c821699fa745825f407af94c8c88837))
+* **deps:** bump @babel/preset-env from 7.9.0 to 7.9.5 ([faaf387](https://github.com/ryanwalters/sticky-events/commit/faaf387ae7d69da014a5ed810847df5ec6ed4959))
+* **deps:** bump @babel/preset-env from 7.9.5 to 7.9.6 ([4e209eb](https://github.com/ryanwalters/sticky-events/commit/4e209eb809fc164d74bd98b0ad1cd1af9ead2246))
+* **deps:** bump husky from 4.2.3 to 4.2.5 ([3c39a96](https://github.com/ryanwalters/sticky-events/commit/3c39a96f1195f18174a98ee55aba967ee31330ae))
+* **deps:** bump prettier from 2.0.2 to 2.0.3 ([844ea3a](https://github.com/ryanwalters/sticky-events/commit/844ea3ae09a4db1a89a602400647e2a97a0c8551))
+* **deps:** bump prettier from 2.0.3 to 2.0.4 ([f49d888](https://github.com/ryanwalters/sticky-events/commit/f49d888a93159194f5805306a7737ca35094fc94))
+* **deps:** bump prettier from 2.0.4 to 2.0.5 ([f972304](https://github.com/ryanwalters/sticky-events/commit/f97230468f8d2f4c897e08f9edc447f3dc8d09b6))
+* **deps:** bump rollup from 2.3.1 to 2.3.2 ([1b33f02](https://github.com/ryanwalters/sticky-events/commit/1b33f0288a84fe2145abc17eb299e6d2df00ed74))
+* **deps:** bump rollup from 2.3.2 to 2.3.3 ([17a966d](https://github.com/ryanwalters/sticky-events/commit/17a966dda0fb25516e17d4c9386e6e550add919c))
+* **deps:** bump rollup from 2.3.3 to 2.3.4 ([a43f5b9](https://github.com/ryanwalters/sticky-events/commit/a43f5b9a254340e8bec033a931d00015d83f1589))
+* **deps:** bump rollup from 2.3.4 to 2.3.5 ([80ed729](https://github.com/ryanwalters/sticky-events/commit/80ed7297219e7e3cd34a2b722aee54285ca067c0))
+* **deps:** bump rollup from 2.3.5 to 2.4.0 ([3e9ce75](https://github.com/ryanwalters/sticky-events/commit/3e9ce75082b048a249275ed22e86e11ae2c12159))
+* **deps:** bump rollup from 2.4.0 to 2.5.0 ([d10e8ec](https://github.com/ryanwalters/sticky-events/commit/d10e8ec0dab5db6b49a042c451af52cca23f5e5c))
+* **deps:** bump rollup from 2.5.0 to 2.6.0 ([e623a13](https://github.com/ryanwalters/sticky-events/commit/e623a13ee16a80f255454b82c62f31ff56383915))
+* **deps:** bump rollup from 2.6.0 to 2.6.1 ([0edd24a](https://github.com/ryanwalters/sticky-events/commit/0edd24acff34ea267c8af81a574008661bc2fd3f))
+* **deps:** bump rollup from 2.6.1 to 2.7.0 ([c6f789e](https://github.com/ryanwalters/sticky-events/commit/c6f789e3a5ec1d45f1c06717bccea9f19f2052f7))
+* **deps:** bump rollup from 2.7.0 to 2.7.1 ([abcefb0](https://github.com/ryanwalters/sticky-events/commit/abcefb05975a3c9b49e9fe7ad86acd5feeeae27f))
+* **deps:** bump rollup from 2.7.1 to 2.7.2 ([66938e1](https://github.com/ryanwalters/sticky-events/commit/66938e145f95dc3e42597a9eef97f502b284fa6d))
+* **deps:** bump rollup from 2.7.2 to 2.7.3 ([638794a](https://github.com/ryanwalters/sticky-events/commit/638794a65557bff05260025ce0fb6a3479832d2b))
+* **deps:** bump rollup from 2.7.3 to 2.7.5 ([123549f](https://github.com/ryanwalters/sticky-events/commit/123549f9090c0909d4d66e598a8895d9e58e0982))
+* **deps:** bump rollup from 2.7.5 to 2.7.6 ([88770c6](https://github.com/ryanwalters/sticky-events/commit/88770c6f5bde48dc19c1342120d29e263ceeb0cb))
+* **deps:** bump rollup from 2.7.6 to 2.8.0 ([f9b003b](https://github.com/ryanwalters/sticky-events/commit/f9b003bf9fb0894b8292e80289f86385d4edddcf))
+* **deps:** bump rollup from 2.8.0 to 2.8.1 ([ffefff7](https://github.com/ryanwalters/sticky-events/commit/ffefff70d95d011c5885a48b3e899e046efbf8ce))
+* **deps:** bump rollup from 2.8.1 to 2.8.2 ([19a4cac](https://github.com/ryanwalters/sticky-events/commit/19a4cac56db6e6b7dbd65b25394c5e3db72b04fd))
+* **deps:** bump standard-version from 7.1.0 to 8.0.0 ([5a14273](https://github.com/ryanwalters/sticky-events/commit/5a1427385b91491a927c12cda3dcb9427d39fea5))
+* **deps:** fix security vulnerabilities ([17cd717](https://github.com/ryanwalters/sticky-events/commit/17cd71743aff01ca2393a29b23115b568952c31a))
+
 ## [3.3.0](https://github.com/ryanwalters/sticky-events/compare/v3.1.2...v3.3.0) (2020-03-31)
 
 ### Features
