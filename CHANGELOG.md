@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.3.3](https://github.com/ryanwalters/sticky-events/compare/v3.3.2...v3.3.3) (2020-06-17)
+
+
+### Bug Fixes
+
+* **build:** trigger publish action ([512fb82](https://github.com/ryanwalters/sticky-events/commit/512fb8269fda3c208ecc7b6f7c779a18168f8d24))
+
 ### [3.3.2](https://github.com/ryanwalters/sticky-events/compare/v3.3.1...v3.3.2) (2020-06-17)
 
 
