@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.3.2](https://github.com/ryanwalters/sticky-events/compare/v3.3.1...v3.3.2) (2020-06-17)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/core from 7.10.0 to 7.10.1 ([3122d54](https://github.com/ryanwalters/sticky-events/commit/3122d546109ddb7f7237c86ca1f14d7b1521c6e9))
+* **deps:** bump @babel/core from 7.10.1 to 7.10.2 ([8c14cf4](https://github.com/ryanwalters/sticky-events/commit/8c14cf42904b22729f610dcbfdfebd6ec323dac5))
+* **deps:** bump @babel/core from 7.9.6 to 7.10.0 ([277434f](https://github.com/ryanwalters/sticky-events/commit/277434f519e4c05ddd3488ddd8aa59c19f4a4607))
+* **deps:** bump @babel/preset-env from 7.10.0 to 7.10.1 ([61ae559](https://github.com/ryanwalters/sticky-events/commit/61ae5595bf7aabda36013f797ce3b544e5739781))
+* **deps:** bump @babel/preset-env from 7.10.1 to 7.10.2 ([7ee6666](https://github.com/ryanwalters/sticky-events/commit/7ee6666020d55227871f95f5c8f7dc1f571bcede))
+* **deps:** bump @babel/preset-env from 7.9.6 to 7.10.0 ([6876854](https://github.com/ryanwalters/sticky-events/commit/68768541861d1a5526d236da11f37d8f2d92d99c))
+* **deps:** bump rollup from 2.10.0 to 2.10.2 ([c950b15](https://github.com/ryanwalters/sticky-events/commit/c950b153005a607e876bf43c12931bfb5d413231))
+* **deps:** bump rollup from 2.10.2 to 2.10.3 ([73faade](https://github.com/ryanwalters/sticky-events/commit/73faade4f3b1c3bab5fed93b0adad4b518c8f70b))
+* **deps:** bump rollup from 2.10.3 to 2.10.4 ([0ad14e8](https://github.com/ryanwalters/sticky-events/commit/0ad14e83951e968e9708ba0a99c9cd337ce3e633))
+* **deps:** bump rollup from 2.10.4 to 2.10.5 ([d51a8f2](https://github.com/ryanwalters/sticky-events/commit/d51a8f24617f51d151efb0e9bc517dee21d58712))
+* **deps:** bump rollup from 2.10.5 to 2.10.7 ([e554d04](https://github.com/ryanwalters/sticky-events/commit/e554d0441769401a2d10040c441afef6c2cc26d9))
+* **deps:** bump rollup from 2.10.7 to 2.10.8 ([6afa1d5](https://github.com/ryanwalters/sticky-events/commit/6afa1d5ff4beb9d26726300c899f621cd8e0cc84))
+* **deps:** bump rollup from 2.10.8 to 2.11.0 ([a2a44bb](https://github.com/ryanwalters/sticky-events/commit/a2a44bbe2dd410573b770f3b36e48b01237ea929))
+* **deps:** bump rollup from 2.11.0 to 2.11.2 ([fee09f4](https://github.com/ryanwalters/sticky-events/commit/fee09f4cc5e361d5a4ead97aa95785d92d555162))
+* **deps:** bump rollup from 2.11.2 to 2.12.0 ([7b52629](https://github.com/ryanwalters/sticky-events/commit/7b526290cff0edadc735d9802db04faa1ea41c7d))
+* **deps:** bump rollup from 2.12.0 to 2.12.1 ([0029462](https://github.com/ryanwalters/sticky-events/commit/00294621bf78d58d268c2aa46dac24c4d6e1ffe8))
+* **deps:** bump rollup from 2.12.1 to 2.13.0 ([008a4c8](https://github.com/ryanwalters/sticky-events/commit/008a4c8e42fa4dcf99b7bd6f50d8b8023ee3798a))
+* **deps:** bump rollup from 2.13.0 to 2.13.1 ([707f501](https://github.com/ryanwalters/sticky-events/commit/707f501db7181554ba2f5c1d9be987cdd24cc7a6))
+* **deps:** bump rollup from 2.13.1 to 2.15.0 ([7b0478b](https://github.com/ryanwalters/sticky-events/commit/7b0478bb4f13e8b3a7e05e4c0c7281bc22b7c1d2))
+* **deps:** bump rollup from 2.15.0 to 2.16.1 ([1dd3979](https://github.com/ryanwalters/sticky-events/commit/1dd3979007ca64d250325492b7555f76b7c97b17))
+* **deps:** bump rollup from 2.8.2 to 2.9.0 ([2482ff5](https://github.com/ryanwalters/sticky-events/commit/2482ff5cde66677f1ebce1f171562115d0bbfe3b))
+* **deps:** bump rollup from 2.9.0 to 2.9.1 ([24b8875](https://github.com/ryanwalters/sticky-events/commit/24b88751ec87322cbd444f354ce23d7e7427ef58))
+* **deps:** bump rollup from 2.9.1 to 2.10.0 ([7f017a4](https://github.com/ryanwalters/sticky-events/commit/7f017a4b6bdda075d18b77b53a02901e82329c81))
+* **deps:** bump serve from 11.3.0 to 11.3.1 ([f25b2de](https://github.com/ryanwalters/sticky-events/commit/f25b2de0686f2c112973618e6e056849e1f9bbbe))
+* **deps:** bump serve from 11.3.1 to 11.3.2 ([f7d5db7](https://github.com/ryanwalters/sticky-events/commit/f7d5db7686739616e1f584ce1a2bf31e630e107d))
+
 ### [3.3.1](https://github.com/ryanwalters/sticky-events/compare/v3.3.0...v3.3.1) (2020-05-07)
 
 
