@@ -1,6 +1,6 @@
 {
   "name": "sticky-events",
-  "version": "3.4.2",
+  "version": "3.4.3",
   "description": "Events for `position: sticky`, without the need for `onscroll`",
   "main": "./dist/sticky-events.cjs.js",
   "module": "./dist/sticky-events.esm.js",
@@ -81,7 +81,8 @@
         "@semantic-release/git",
         {
           "assets": [
-            "package.json", "CHANGELOG.md"
+            "package.json",
+            "CHANGELOG.md"
           ],
           "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
         }

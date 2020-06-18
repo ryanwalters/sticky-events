@@ -1,3 +1,10 @@
+## [3.4.3](https://github.com/ryanwalters/sticky-events/compare/v3.4.2...v3.4.3) (2020-06-18)
+
+
+### Bug Fixes
+
+* **build:** push changelog during release ([80f80bc](https://github.com/ryanwalters/sticky-events/commit/80f80bcd9ae329a7784ce3ad580b9f19e65dba2e))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
