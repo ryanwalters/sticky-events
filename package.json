@@ -6,15 +6,12 @@
   "module": "./dist/sticky-events.esm.js",
   "browser": "./dist/sticky-events.umd.js",
   "scripts": {
-    "prepare-release": "standard-version && prettier --write CHANGELOG.md",
     "prebuild": "rimraf dist",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "pretest": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "serve",
-    "prepublishOnly": "git pull --rebase && npm run build",
-    "postpublish": "git push --follow-tags"
+    "test": "echo \"No tests!\"",
+    "serve": "serve"
   },
   "repository": {
     "type": "git",
@@ -47,8 +44,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-uglify": "^6.0.4",
-    "serve": "^11.3.0",
-    "standard-version": "^8.0.0"
+    "serve": "^11.3.0"
   },
   "commitlint": {
     "extends": [
