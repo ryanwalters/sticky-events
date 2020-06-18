@@ -2,8 +2,8 @@ name: Release and publish
 
 on:
   push:
-    tags:
-      - v*
+    branches:
+      - master
 
 jobs:
   build:
