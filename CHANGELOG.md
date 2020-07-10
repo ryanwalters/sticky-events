@@ -1,3 +1,10 @@
+## [3.4.8](https://github.com/ryanwalters/sticky-events/compare/v3.4.7...v3.4.8) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @commitlint/cli from 8.3.5 to 9.0.1 ([39ab8d8](https://github.com/ryanwalters/sticky-events/commit/39ab8d825d41051667903b7b7458cd8cccaa2feb))
+
 ## [3.4.7](https://github.com/ryanwalters/sticky-events/compare/v3.4.6...v3.4.7) (2020-07-10)
 
 
