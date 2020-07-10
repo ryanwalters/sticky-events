@@ -1,3 +1,10 @@
+## [3.4.4](https://github.com/ryanwalters/sticky-events/compare/v3.4.3...v3.4.4) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump npm-registry-fetch from 4.0.4 to 4.0.5 ([6f3183a](https://github.com/ryanwalters/sticky-events/commit/6f3183ac82f27d852adf65792c916002b690829c))
+
 ## [3.4.3](https://github.com/ryanwalters/sticky-events/compare/v3.4.2...v3.4.3) (2020-06-18)
 
 
