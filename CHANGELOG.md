@@ -1,3 +1,10 @@
+## [3.4.6](https://github.com/ryanwalters/sticky-events/compare/v3.4.5...v3.4.6) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/preset-env from 7.10.2 to 7.10.4 ([03ef58e](https://github.com/ryanwalters/sticky-events/commit/03ef58e9b38cbdb9e15d060b26a3fc12c5b37fca))
+
 ## [3.4.5](https://github.com/ryanwalters/sticky-events/compare/v3.4.4...v3.4.5) (2020-07-10)
 
 
