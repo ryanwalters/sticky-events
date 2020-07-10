@@ -1,3 +1,10 @@
+## [3.4.7](https://github.com/ryanwalters/sticky-events/compare/v3.4.6...v3.4.7) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @commitlint/config-conventional from 8.3.4 to 9.0.1 ([669d2a4](https://github.com/ryanwalters/sticky-events/commit/669d2a40dc79d0e37fe813e1819d313c461b4d4d))
+
 ## [3.4.6](https://github.com/ryanwalters/sticky-events/compare/v3.4.5...v3.4.6) (2020-07-10)
 
 
