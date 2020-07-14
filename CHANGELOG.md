@@ -1,3 +1,32 @@
+## [3.4.8](https://github.com/ryanwalters/sticky-events/compare/v3.4.7...v3.4.8) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @commitlint/cli from 8.3.5 to 9.0.1 ([39ab8d8](https://github.com/ryanwalters/sticky-events/commit/39ab8d825d41051667903b7b7458cd8cccaa2feb))
+
+## [3.4.7](https://github.com/ryanwalters/sticky-events/compare/v3.4.6...v3.4.7) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @commitlint/config-conventional from 8.3.4 to 9.0.1 ([669d2a4](https://github.com/ryanwalters/sticky-events/commit/669d2a40dc79d0e37fe813e1819d313c461b4d4d))
+
+## [3.4.6](https://github.com/ryanwalters/sticky-events/compare/v3.4.5...v3.4.6) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/preset-env from 7.10.2 to 7.10.4 ([03ef58e](https://github.com/ryanwalters/sticky-events/commit/03ef58e9b38cbdb9e15d060b26a3fc12c5b37fca))
+
+## [3.4.5](https://github.com/ryanwalters/sticky-events/compare/v3.4.4...v3.4.5) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/core from 7.10.2 to 7.10.4 ([03c089d](https://github.com/ryanwalters/sticky-events/commit/03c089d560cce616fbd1364a38ed92549aac8185))
+* **deps:** bump rollup from 2.17.0 to 2.21.0 ([c9e6e13](https://github.com/ryanwalters/sticky-events/commit/c9e6e137fbfa428d95e6123e2dfc6ba35909d8de))
+
 ## [3.4.4](https://github.com/ryanwalters/sticky-events/compare/v3.4.3...v3.4.4) (2020-07-10)
 
 
