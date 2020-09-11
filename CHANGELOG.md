@@ -1,3 +1,10 @@
+## [3.4.9](https://github.com/ryanwalters/sticky-events/compare/v3.4.8...v3.4.9) (2020-09-11)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump node-fetch from 2.6.0 to 2.6.1 ([be27be9](https://github.com/ryanwalters/sticky-events/commit/be27be91bd41ca6a134ffc399e909d34f47f756c))
+
 ## [3.4.8](https://github.com/ryanwalters/sticky-events/compare/v3.4.7...v3.4.8) (2020-07-10)
 
 
