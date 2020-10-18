@@ -1,3 +1,10 @@
+## [3.4.10](https://github.com/ryanwalters/sticky-events/compare/v3.4.9...v3.4.10) (2020-10-18)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump npm-user-validate from 1.0.0 to 1.0.1 ([108506c](https://github.com/ryanwalters/sticky-events/commit/108506cc59edf2f8aa258ab8cec6cd1aa082d5a3))
+
 ## [3.4.9](https://github.com/ryanwalters/sticky-events/compare/v3.4.8...v3.4.9) (2020-09-11)
 
 
