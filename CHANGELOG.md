@@ -1,3 +1,10 @@
+## [3.4.11](https://github.com/ryanwalters/sticky-events/compare/v3.4.10...v3.4.11) (2021-02-01)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump ini from 1.3.5 to 1.3.8 ([2c138f7](https://github.com/ryanwalters/sticky-events/commit/2c138f7bfb7503bd5a07b40677fbebc7b68e935a))
+
 ## [3.4.10](https://github.com/ryanwalters/sticky-events/compare/v3.4.9...v3.4.10) (2020-10-18)
 
 
