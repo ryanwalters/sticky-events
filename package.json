@@ -42,7 +42,7 @@
     "@semantic-release/github": "^7.0.7",
     "@semantic-release/npm": "^7.0.5",
     "@semantic-release/release-notes-generator": "^9.0.1",
-    "husky": "^4.2.3",
+    "husky": "^5.1.2",
     "prettier": "^2.0.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.3.1",
