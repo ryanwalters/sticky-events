@@ -11,7 +11,8 @@
     "dev": "rollup -c -w",
     "pretest": "npm run build",
     "test": "echo \"No tests!\"",
-    "serve": "serve"
+    "serve": "serve",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -42,7 +43,7 @@
     "@semantic-release/github": "^7.2.0",
     "@semantic-release/npm": "^7.1.0",
     "@semantic-release/release-notes-generator": "^9.0.2",
-    "husky": "^4.3.8",
+    "husky": "^6.0.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.44.0",
@@ -61,11 +62,6 @@
         0,
         "always"
       ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "files": [
