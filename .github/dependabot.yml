@@ -1,0 +1,36 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "11:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@commitlint/config-conventional"
+    versions:
+    - 12.0.1
+  - dependency-name: "@commitlint/cli"
+    versions:
+    - 12.0.1
+  - dependency-name: "@babel/preset-env"
+    versions:
+    - 7.13.8
+  - dependency-name: rollup
+    versions:
+    - 2.35.1
+    - 2.40.0
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.13.8
+  - dependency-name: husky
+    versions:
+    - 4.3.6
+    - 5.1.2
+  - dependency-name: "@semantic-release/npm"
+    versions:
+    - 7.0.9
+  commit-message:
+    prefix: fix
+    prefix-development: chore
+    include: scope
