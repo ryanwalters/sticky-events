@@ -1,0 +1,18 @@
+{
+  "extends": ["config:base", "schedule:monthly"],
+  "reviewers": ["ryanwalters"],
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "devDependencies (non-major)",
+      "groupSlug": "dev-dependencies"
+    },
+    {
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "dependencies (non-major)",
+      "groupSlug": "dependencies"
+    }
+  ]
+}
