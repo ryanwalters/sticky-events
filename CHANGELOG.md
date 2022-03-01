@@ -1,3 +1,10 @@
+## [3.4.12](https://github.com/ryanwalters/sticky-events/compare/v3.4.11...v3.4.12) (2022-03-01)
+
+
+### Bug Fixes
+
+* minify with terser ([a2e322b](https://github.com/ryanwalters/sticky-events/commit/a2e322bb24afe5576a934ad902116933cb055f41))
+
 ## [3.4.11](https://github.com/ryanwalters/sticky-events/compare/v3.4.10...v3.4.11) (2021-02-01)
 
 
