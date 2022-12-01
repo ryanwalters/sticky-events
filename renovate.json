@@ -4,7 +4,8 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin"],
-      "automerge": true
+      "automerge": true,
+      "platformAutomerge": true
     },
     {
       "matchDepTypes": ["devDependencies"],
