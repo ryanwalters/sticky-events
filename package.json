@@ -45,13 +45,13 @@
     "@semantic-release/commit-analyzer": "9.0.2",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "8.1.0",
-    "@semantic-release/npm": "9.0.2",
-    "@semantic-release/release-notes-generator": "10.0.3",
+    "@semantic-release/npm": "10.0.3",
+    "@semantic-release/release-notes-generator": "11.0.2",
     "husky": "8.0.3",
     "prettier": "2.8.8",
     "rimraf": "5.0.1",
     "rollup": "3.23.0",
-    "semantic-release": "19.0.5",
+    "semantic-release": "21.0.2",
     "serve": "14.2.0"
   },
   "commitlint": {
