@@ -48,7 +48,7 @@
     "@semantic-release/npm": "10.0.5",
     "@semantic-release/release-notes-generator": "11.0.7",
     "husky": "8.0.3",
-    "prettier": "2.8.8",
+    "prettier": "3.0.3",
     "rimraf": "5.0.1",
     "rollup": "3.28.1",
     "semantic-release": "21.1.1",
