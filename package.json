@@ -12,7 +12,7 @@
     "pretest": "npm run build",
     "test": "echo \"No tests!\"",
     "serve": "serve",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
