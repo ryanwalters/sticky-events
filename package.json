@@ -33,8 +33,8 @@
   },
   "homepage": "https://github.com/ryanwalters/sticky-events#readme",
   "devDependencies": {
-    "@babel/core": "7.27.7",
-    "@babel/preset-env": "7.27.2",
+    "@babel/core": "7.28.4",
+    "@babel/preset-env": "7.28.3",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@rollup/plugin-babel": "6.0.4",
@@ -44,15 +44,15 @@
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.1",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "11.0.3",
+    "@semantic-release/github": "11.0.6",
     "@semantic-release/npm": "12.0.2",
-    "@semantic-release/release-notes-generator": "14.0.3",
+    "@semantic-release/release-notes-generator": "14.1.0",
     "husky": "9.1.7",
     "prettier": "3.6.2",
     "rimraf": "6.0.1",
-    "rollup": "4.44.1",
-    "semantic-release": "24.2.6",
-    "serve": "14.2.4"
+    "rollup": "4.52.3",
+    "semantic-release": "24.2.9",
+    "serve": "14.2.5"
   },
   "commitlint": {
     "extends": [
